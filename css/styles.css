@@ -768,8 +768,10 @@ h1 em {
     grid-template-columns: 1fr auto;
   }
 
+  /* El menú baja de renglón; en móvil se recorre, no se esconde */
   .nav {
-    display: none;
+    grid-column: 1 / -1;
+    justify-content: flex-start;
   }
 
   .hero-grid,
