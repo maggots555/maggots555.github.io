@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--
+    EXPLICACIÓN PARA PRINCIPIANTES:
+    Estos meta tags le dicen a Google y a WhatsApp/Twitter qué mostrar
+    cuando alguien comparte el enlace del portafolio.
+  -->
+  <title>maggots555 — Bitácora de taller</title>
+  <meta name="description" content="Portafolio de maggots555. Sistemas para centros de servicio técnico: SIGMA (Django), un taller en PHP y herramientas MCP.">
+  <meta name="theme-color" content="#14110e">
+  <meta property="og:title" content="maggots555 — Bitácora de taller">
+  <meta property="og:description" content="Construyo software para talleres que no caben en un Excel. Proyecto principal: SIGMA.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://maggots555.github.io/">
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/178110991?v=4">
+  <link rel="canonical" href="https://maggots555.github.io/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <!-- Tipografías: titular de taller + serif de ficha impresa + mono de folio -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,ital,wght@8..60,0,400;8..60,0,600;8..60,1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Capa de grano: textura de banco de trabajo, no un fondo liso -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!--
+    Cabecera tipo ficha de recepción: folio, sucursal y estado.
+    En un taller real esto iría impreso arriba de la orden.
+  -->
+  <header class="mast">
+    <div class="wrap mast-inner">
+      <a class="brand" href="#inicio">
+        <span class="brand-mark" aria-hidden="true">OS</span>
+        <span class="brand-copy">
+          <strong>maggots555</strong>
+          <small>Bitácora de taller</small>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Secciones">
+        <a href="#inicio">Recepción</a>
+        <a href="#sigma">SIGMA</a>
+        <a href="#ordenes">Órdenes</a>
+        <a href="#banco">Banco</a>
+        <a href="#entrega">Entrega</a>
+      </nav>
+      <p class="folio">
+        <span>Folio</span>
+        <time id="folio-fecha" datetime="2026-09-09">OS-2026-09-09</time>
+      </p>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <!-- ========== HERO / RECEPCIÓN ========== -->
+    <section id="inicio" class="hero">
+      <div class="wrap hero-grid">
+        <article class="ticket ticket-hero reveal">
+          <div class="ticket-perforation" aria-hidden="true"></div>
+          <header class="ticket-head">
+            <p class="kicker">Orden de servicio · portafolio</p>
+            <p class="stamp stamp-amber">En banco</p>
+          </header>
+          <h1>
+            Construyo sistemas para talleres que
+            <em>no caben en un Excel.</em>
+          </h1>
+          <p class="lede">
+            Empecé con PHP, MySQL y XAMPP para controlar reparaciones.
+            Hoy el proyecto principal es <strong>SIGMA</strong>: un sistema
+            Django de producción para centros de servicio técnico —
+            órdenes, almacén, calidad, evidencia y seguimiento al cliente.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-ink" href="#sigma">Abrir ficha SIGMA</a>
+            <a class="btn btn-ghost" href="https://github.com/maggots555" rel="noopener noreferrer">GitHub</a>
+          </div>
+          <dl class="meta-row">
+            <div>
+              <dt>Técnico</dt>
+              <dd>@maggots555</dd>
+            </div>
+            <div>
+              <dt>Especialidad</dt>
+              <dd>Gestión de taller</dd>
+            </div>
+            <div>
+              <dt>Idioma</dt>
+              <dd>es-MX</dd>
+            </div>
+            <div>
+              <dt>Estado</dt>
+              <dd><span class="led" aria-hidden="true"></span> Activo</dd>
+            </div>
+          </dl>
+        </article>
+
+        <!-- Panel oscuro tipo terminal de diagnóstico -->
+        <aside class="scope reveal" aria-label="Resumen del banco">
+          <p class="scope-label">Monitor de banco</p>
+          <ul class="scope-stats">
+            <li>
+              <span>Apps de negocio</span>
+              <strong>05</strong>
+            </li>
+            <li>
+              <span>Países / tenants</span>
+              <strong>04</strong>
+            </li>
+            <li>
+              <span>Estados de orden</span>
+              <strong>22</strong>
+            </li>
+            <li>
+              <span>Módulos TypeScript</span>
+              <strong>74</strong>
+            </li>
+          </ul>
+          <p class="scope-foot">Cifras de SIGMA v1.0 · Django 5.2 · Python 3.12</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ========== SIGMA (PROYECTO ESTRELLA) ========== -->
+    <section id="sigma" class="block">
+      <div class="wrap">
+        <p class="section-kicker">Proyecto principal · OS-001</p>
+        <h2 class="section-title">SIGMA</h2>
+        <p class="section-sub">
+          Sistema Integrado de Gestión Técnica y Control de Calidad.
+          No es un CRUD de inventario: es el flujo completo del centro de servicio.
+        </p>
+
+        <article class="ticket ticket-feature reveal">
+          <div class="ticket-perforation" aria-hidden="true"></div>
+          <div class="feature-grid">
+            <div>
+              <header class="ticket-head">
+                <p class="kicker">inventario-calidad-django</p>
+                <p class="stamp stamp-teal">Producción</p>
+              </header>
+              <h3>Del ingreso del equipo a la entrega, en un solo sistema.</h3>
+              <p>
+                SIGMA digitaliza el taller: 22 estados de orden, cotizador
+                sincronizado con almacén, incidencias de calidad, cámara de
+                evidencia, portal del cliente (PWA + push) y arquitectura
+                multi-país (México, Argentina, Chile, Colombia).
+              </p>
+              <p>
+                El código vive en GitHub. GitHub Pages <em>no puede ejecutar
+                Django</em> (necesita Python, PostgreSQL, Redis y Celery),
+                por eso este portafolio es la vitrina y el repo es el taller.
+              </p>
+              <ul class="chip-list">
+                <li>Django 5.2</li>
+                <li>Python 3.12</li>
+                <li>TypeScript</li>
+                <li>PostgreSQL</li>
+                <li>Celery + Redis</li>
+                <li>PWA</li>
+                <li>Plotly / ML</li>
+              </ul>
+              <div class="hero-actions">
+                <a class="btn btn-ink" href="https://github.com/maggots555/inventario-calidad-django" rel="noopener noreferrer">Ver código</a>
+                <a class="btn btn-ghost" href="https://github.com/maggots555/inventario-calidad-django#readme" rel="noopener noreferrer">README</a>
+              </div>
+            </div>
+
+            <!-- Maqueta CSS: simula un tablero sin necesitar capturas reales -->
+            <div class="mock" aria-hidden="true">
+              <div class="mock-bar">
+                <span></span><span></span><span></span>
+                <em>sigma · detalle orden</em>
+              </div>
+              <div class="mock-body">
+                <div class="mock-side">
+                  <b>FL-1842</b>
+                  <small>ThinkPad · ingreso</small>
+                  <ol>
+                    <li class="is-done">Recepción</li>
+                    <li class="is-done">Diagnóstico</li>
+                    <li class="is-now">Cotización</li>
+                    <li>Reparación</li>
+                    <li>Calidad</li>
+                    <li>Entrega</li>
+                  </ol>
+                </div>
+                <div class="mock-main">
+                  <div class="kpi">
+                    <span>Órdenes abiertas</span>
+                    <strong>47</strong>
+                  </div>
+                  <div class="kpi">
+                    <span>Atraso</span>
+                    <strong>03</strong>
+                  </div>
+                  <div class="kpi">
+                    <span>RHITSO</span>
+                    <strong>08</strong>
+                  </div>
+                  <div class="mock-chart">
+                    <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Módulos como líneas de una orden -->
+        <ul class="module-list">
+          <li class="reveal">
+            <span class="mod-id">01</span>
+            <div>
+              <h3>Servicio técnico</h3>
+              <p>Órdenes, piezas WPB/DOA, venta mostrador, RHITSO y multimedia.</p>
+            </div>
+          </li>
+          <li class="reveal">
+            <span class="mod-id">02</span>
+            <div>
+              <h3>Almacén / cotizador</h3>
+              <p>Compras, profit, reacondicionados y sync con la orden de ST.</p>
+            </div>
+          </li>
+          <li class="reveal">
+            <span class="mod-id">03</span>
+            <div>
+              <h3>Score Card</h3>
+              <p>Incidencias, reincidencias, Pareto y reportes de calidad.</p>
+            </div>
+          </li>
+          <li class="reveal">
+            <span class="mod-id">04</span>
+            <div>
+              <h3>Portal cliente</h3>
+              <p>Seguimiento público, chat, galería, PWA y notificaciones push.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ========== OTRAS ÓRDENES ========== -->
+    <section id="ordenes" class="block block-dim">
+      <div class="wrap">
+        <p class="section-kicker">Historial · OS-002 / OS-003</p>
+        <h2 class="section-title">Otras órdenes</h2>
+        <p class="section-sub">El PHP fue el primer banco. El MCP es una herramienta de escritorio.</p>
+
+        <div class="order-grid">
+          <article class="ticket reveal">
+            <div class="ticket-perforation" aria-hidden="true"></div>
+            <header class="ticket-head">
+              <p class="kicker">sistema-reparaciones-php</p>
+              <p class="stamp stamp-red">Origen</p>
+            </header>
+            <h3>Sistema de reparaciones (PHP)</h3>
+            <p>
+              Gestión de reparaciones de equipos electrónicos con el stack
+              clásico: PHP, MySQL, HTML, CSS, JavaScript, Bootstrap, jQuery
+              y DataTables. Aquí aprendí el dominio del taller —folios,
+              estados, clientes— antes de reconstruir el flujo en Django.
+            </p>
+            <ul class="chip-list">
+              <li>PHP</li>
+              <li>MySQL</li>
+              <li>Bootstrap</li>
+              <li>jQuery</li>
+              <li>DataTables</li>
+            </ul>
+            <a class="btn btn-ink" href="https://github.com/maggots555/sistema-reparaciones-php" rel="noopener noreferrer">Ver código</a>
+          </article>
+
+          <article class="ticket reveal">
+            <div class="ticket-perforation" aria-hidden="true"></div>
+            <header class="ticket-head">
+              <p class="kicker">mcp-servers</p>
+              <p class="stamp stamp-amber">Herramienta</p>
+            </header>
+            <h3>Servidor MCP</h3>
+            <p>
+              Servidor MCP en JavaScript para añadir funcionalidad tipo
+              VS Code a Antigravity. Pieza chica, distinta al taller:
+              automatizar el entorno de desarrollo, no el mostrador.
+            </p>
+            <ul class="chip-list">
+              <li>JavaScript</li>
+              <li>MCP</li>
+              <li>Antigravity</li>
+            </ul>
+            <a class="btn btn-ink" href="https://github.com/maggots555/mcp-servers" rel="noopener noreferrer">Ver código</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== BANCO DE HERRAMIENTAS ========== -->
+    <section id="banco" class="block">
+      <div class="wrap">
+        <p class="section-kicker">Inventario del banco</p>
+        <h2 class="section-title">Herramientas</h2>
+        <p class="section-sub">Lo que uso en el día a día, agrupado como en un tablero de ganchos.</p>
+
+        <div class="pegboard">
+          <div class="peg-col reveal">
+            <h3>Mostrador</h3>
+            <ul>
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>JavaScript</li>
+              <li>TypeScript</li>
+              <li>Bootstrap</li>
+              <li>jQuery</li>
+              <li>DataTables</li>
+            </ul>
+          </div>
+          <div class="peg-col reveal">
+            <h3>Taller</h3>
+            <ul>
+              <li>PHP</li>
+              <li>Python</li>
+              <li>Django</li>
+              <li>MySQL</li>
+              <li>PostgreSQL</li>
+              <li>SQLite</li>
+            </ul>
+          </div>
+          <div class="peg-col reveal">
+            <h3>Infra</h3>
+            <ul>
+              <li>Celery</li>
+              <li>Redis</li>
+              <li>XAMPP</li>
+              <li>Git / GitHub</li>
+              <li>PWA</li>
+              <li>FFmpeg</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== ENTREGA / CONTACTO ========== -->
+    <section id="entrega" class="block block-end">
+      <div class="wrap">
+        <article class="ticket ticket-end reveal">
+          <div class="ticket-perforation" aria-hidden="true"></div>
+          <p class="kicker">Mostrador de entrega</p>
+          <h2>¿Quieres ver el taller por dentro?</h2>
+          <p>
+            El código de SIGMA es público. Si te interesa el dominio
+            (servicio técnico, calidad, almacén) o quieres platicar del
+            stack, ábreme un issue o escribe por GitHub.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-ink" href="https://github.com/maggots555" rel="noopener noreferrer">Perfil GitHub</a>
+            <a class="btn btn-ghost" href="https://github.com/maggots555/inventario-calidad-django" rel="noopener noreferrer">Repo SIGMA</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-inner">
+      <p>© <span id="anio">2026</span> maggots555 · Portafolio estático en GitHub Pages.</p>
+      <p>SIGMA corre en Django; esta página solo lo presenta.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
