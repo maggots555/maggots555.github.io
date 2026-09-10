@@ -584,6 +584,12 @@ h1 em {
 }
 
 .lightbox {
+  /*
+    Tailwind v4 pone margin: 0 a *todos* los elementos (preflight).
+    El <dialog> nativo se centra con margin: auto; sin eso queda
+    pegado arriba a la izquierda.
+  */
+  margin: auto;
   width: min(96vw, 1100px);
   max-height: 92vh;
   padding: 1rem 1rem 1.1rem;
