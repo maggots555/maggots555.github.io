@@ -54,13 +54,15 @@
         <time id="folio-fecha" datetime="2026-09-09">2026-09-09</time>
       </p>
     </div>
+    <!-- Barra de progreso: tinta que avanza según el scroll (solo transform). -->
+    <div class="scroll-ink" aria-hidden="true"><span id="scroll-ink-bar"></span></div>
   </header>
 
   <main id="contenido">
     <!-- ========== HERO: QUIÉN SOY ========== -->
     <section id="inicio" class="hero">
       <div class="wrap hero-grid">
-        <article class="ticket ticket-hero reveal">
+        <article class="ticket ticket-hero">
           <div class="ticket-perforation" aria-hidden="true"></div>
           <header class="ticket-head">
             <p class="kicker">Portafolio personal</p>
@@ -101,7 +103,7 @@
         </article>
 
         <!-- Resumen corto: persona primero, SIGMA como prueba -->
-        <aside class="scope reveal" aria-label="Resumen">
+        <aside class="scope" aria-label="Resumen">
           <p class="scope-label">Resumen</p>
           <ul class="scope-stats">
             <li>
@@ -221,7 +223,7 @@
         -->
         <h3 class="gallery-title">Capturas</h3>
         <p class="gallery-hint">Pantallas del sistema en producción. Clic para ampliar.</p>
-        <ul class="shot-gallery">
+        <ul class="shot-gallery reveal">
           <li>
             <figure class="shot" data-caption="Cotizaciones en el tiempo: aceptadas, rechazadas y pendientes, mes a mes.">
               <img src="assets/sigma/cotizaciones.png" alt="Gráfico de evolución mensual de cotizaciones en SIGMA: aceptadas, rechazadas y pendientes" width="1600" height="720">
