@@ -645,6 +645,7 @@ h1 em {
 .module-list .reveal:nth-child(4) { transition-delay: 0.24s; }
 .pegboard .reveal:nth-child(2) { transition-delay: 0.1s; }
 .pegboard .reveal:nth-child(3) { transition-delay: 0.2s; }
+.pegboard .reveal:nth-child(4) { transition-delay: 0.3s; }
 .order-grid .reveal:nth-child(2) { transition-delay: 0.1s; }
 
 /* Encabezado de sección: el h2 es el gráfico, sin ceja en versales. */

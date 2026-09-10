@@ -6,11 +6,11 @@ import { herramientas } from "../data/herramientas";
   <div class="wrap">
     <header class="section-head">
       <h2 class="reveal">Herramientas</h2>
-      <p class="reveal">Lo que uso en el día a día, agrupado por capa.</p>
+      <p class="reveal">Lenguajes, infraestructura y el copiloto con el que escribo.</p>
     </header>
 
-    {/* Tres columnas tipo créditos finales, no un tablero de clavijas. */}
-    <div class="pegboard grid grid-cols-1 gap-8 desk:grid-cols-3">
+    {/* Cuatro columnas de créditos: frontend, backend, infra, copiloto. */}
+    <div class="pegboard grid grid-cols-1 gap-8 compact:grid-cols-2 desk:grid-cols-4">
       {
         herramientas.map((capa) => (
           <div class="credit-col reveal">

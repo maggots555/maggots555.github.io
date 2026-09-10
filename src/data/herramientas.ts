@@ -28,4 +28,9 @@ export const herramientas: CapaHerramientas[] = [
     titulo: "Infraestructura",
     items: ["Celery", "Redis", "XAMPP", "Git / GitHub", "PWA", "FFmpeg"],
   },
+  {
+    // Copiloto: con qué escribo, no un “100% IA”.
+    titulo: "Copiloto",
+    items: ["Cursor", "Claude Code", "Codex", "OpenCode"],
+  },
 ];
