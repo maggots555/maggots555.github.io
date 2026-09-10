@@ -1,7 +1,11 @@
 ---
+/**
+ * Secuencia de título: el nombre ocupa el vacío de la izquierda.
+ * La pintura (public/assets/chiaroscuro.jpg) vive a la derecha,
+ * fundida al negro, como en el cuadro de referencia.
+ */
 import { sitio } from "../data/sitio";
 import Ticket from "./Ticket.astro";
-import Stamp from "./Stamp.astro";
 
 const meta = [
   { dt: "Nombre", dd: sitio.nombreCorto },
@@ -10,66 +14,69 @@ const meta = [
 ];
 ---
 
-<section id="inicio" class="hero py-[2.8rem] pb-4">
-  <div class="wrap grid items-stretch gap-5 desk:grid-cols-[1.4fr_0.9fr]">
-    <Ticket class="ticket-hero">
-      <header class="mb-3.5 flex items-center justify-between gap-4">
-        <p class="kicker">Portafolio personal</p>
-        <Stamp tono="amber" texto="Activo" />
-      </header>
-      <h1>
-        Soy {sitio.nombre}.
-        <em>Desarrollador.</em>
-      </h1>
-      <p class="lede">
-        Escribo software de punta a punta: de la base de datos a la pantalla.
-        Aprendí con PHP, MySQL y XAMPP; hoy trabajo sobre todo con Django. El
-        proyecto con el que me presento es <strong>SIGMA</strong>, un sistema en
-        producción.
-      </p>
-      <div class="mt-[1.4rem] flex flex-wrap gap-[0.7rem]">
-        <a class="btn btn-ink" href="#sigma">Ver SIGMA</a>
-        <a class="btn btn-ghost" href={sitio.github} rel="noopener noreferrer">GitHub</a>
-      </div>
-      <dl
-        class="meta-row mt-7 grid grid-cols-2 gap-3 border-t border-dashed border-papel-borde pt-5 desk:grid-cols-4"
-      >
-        {
-          meta.map((fila) => (
-            <div>
-              <dt>{fila.dt}</dt>
-              <dd>{fila.dd}</dd>
-            </div>
-          ))
-        }
-        <div>
-          <dt>Estado</dt>
-          <dd><span class="led" aria-hidden="true"></span> Activo</dd>
+<section id="inicio" class="hero">
+  {/* Figura: solo atmósfera. alt vacío porque no aporta información extra. */}
+  <div class="hero-atmosphere" aria-hidden="true">
+    <img src="/assets/chiaroscuro.jpg" alt="" width="1024" height="811" />
+  </div>
+
+  <div class="hero-copy">
+    <Ticket class="panel-hero">
+      <div class="hero-main">
+        <h1>
+          <span class="hero-soy">Soy</span>
+          <span class="hero-name">Jorge Luis</span>
+          <span class="hero-name">Magos</span>
+          <span class="hero-name">Alvarez</span>
+          <em>Desarrollador</em>
+        </h1>
+        <p class="lede">
+          Escribo software de punta a punta: de la base de datos a la pantalla.
+          Aprendí con PHP, MySQL y XAMPP; hoy trabajo sobre todo con Django. El
+          proyecto con el que me presento es <strong class="text-papel">SIGMA</strong>, un sistema en
+          producción.
+        </p>
+        <div class="hero-actions mt-[1.6rem] flex flex-wrap gap-[0.7rem]">
+          <a class="btn btn-ink" href="#sigma">Ver SIGMA</a>
+          <a class="btn btn-ghost" href={sitio.github} rel="noopener noreferrer">GitHub</a>
         </div>
-      </dl>
+        <dl
+          class="meta-row mt-8 grid grid-cols-2 gap-3 border-t border-papel/15 pt-5 desk:grid-cols-4"
+        >
+          {
+            meta.map((fila) => (
+              <div>
+                <dt>{fila.dt}</dt>
+                <dd>{fila.dd}</dd>
+              </div>
+            ))
+          }
+          <div>
+            <dt>Estado</dt>
+            <dd>Activo</dd>
+          </div>
+        </dl>
+      </div>
     </Ticket>
 
-    <aside class="scope" aria-label="Resumen">
-      <p class="scope-label">Resumen</p>
-      <ul class="scope-stats">
-        <li>
-          <span>Estudio</span>
-          <strong>CONALEP</strong>
-        </li>
-        <li>
-          <span>Operación</span>
-          <strong>2017+</strong>
-        </li>
-        <li>
-          <span>Proyecto insignia</span>
-          <strong>SIGMA</strong>
-        </li>
-        <li>
-          <span>Stack actual</span>
-          <strong>Django</strong>
-        </li>
-      </ul>
-      <p class="scope-foot">Técnico en Informática · PHP de origen · Django en producción</p>
-    </aside>
+    <ul class="hero-credits" aria-label="Resumen">
+      <li>
+        <span>Estudio</span>
+        <strong>CONALEP</strong>
+      </li>
+      <li>
+        <span>Operación</span>
+        <strong>2017+</strong>
+      </li>
+      <li>
+        <span>Proyecto insignia</span>
+        <strong>SIGMA</strong>
+      </li>
+      <li>
+        <span>Stack actual</span>
+        <strong>Django</strong>
+      </li>
+    </ul>
+    <p class="hero-foot">Técnico en Informática · PHP de origen · Django en producción</p>
   </div>
 </section>

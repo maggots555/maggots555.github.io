@@ -22,5 +22,5 @@ export const sitio = {
   ogDescripcion:
     "Desarrollador. Proyecto insignia: SIGMA, un sistema Django en producción.",
   ogImagen: "https://avatars.githubusercontent.com/u/178110991?v=4",
-  themeColor: "#14110e",
+  themeColor: "#0c0b0a",
 } as const;

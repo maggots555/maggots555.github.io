@@ -1,8 +1,12 @@
 ---
 /**
- * Ficha de papel con perforación.
- * `<slot />` es el interior: cada página mete títulos, párrafos, botones...
- * `class` extra sirve para ticket-hero, ticket-end o reveal.
+ * Panel editorial (el hueco de contenido de cada bloque).
+ *
+ * EXPLICACIÓN:
+ * Antes era una ficha de papel con perforación. Ahora es solo un
+ * contenedor: el diseño vive en global.css (.panel).
+ * `<slot />` es el interior: títulos, párrafos, botones...
+ * `class` extra sirve para panel-hero, panel-end, etc.
  */
 interface Props {
   class?: string;
@@ -11,7 +15,6 @@ interface Props {
 const { class: extra = "" } = Astro.props;
 ---
 
-<article class:list={["ticket", extra]}>
-  <div class="ticket-perforation" aria-hidden="true"></div>
+<article class:list={["panel", extra]}>
   <slot />
 </article>

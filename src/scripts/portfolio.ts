@@ -6,8 +6,7 @@
  * No habla con Django ni con una base de datos.
  *  1) Fecha de hoy y año del pie.
  *  2) Galería + lightbox.
- *  3) Revelar bloques al hacer scroll (Intersection Observer).
- *  4) Barra de tinta según cuánto has bajado.
+ *  3) Barra de luz según cuánto has bajado.
  *
  * TypeScript nos obliga a preguntar “¿existe este elemento?” antes de usarlo.
  * Por eso ves `if (fechaNodo)` y `instanceof HTMLDialogElement`.
@@ -104,37 +103,7 @@ function mostrarPlaceholder(figura: HTMLElement, img: HTMLImageElement): void {
 }
 
 /**
- * Cuando un bloque .reveal entra en pantalla, le ponemos .is-in.
- * El CSS hace el fade. Solo una vez (unobserve).
- */
-function iniciarRevelado(sinMovimiento: boolean): void {
-  const nodos = document.querySelectorAll(".reveal");
-  if (sinMovimiento || !("IntersectionObserver" in window)) {
-    nodos.forEach((nodo) => {
-      nodo.classList.add("is-in");
-    });
-    return;
-  }
-
-  const observador = new IntersectionObserver(
-    (entradas) => {
-      entradas.forEach((entrada) => {
-        if (entrada.isIntersecting) {
-          entrada.target.classList.add("is-in");
-          observador.unobserve(entrada.target);
-        }
-      });
-    },
-    { threshold: 0.05, rootMargin: "40px 0px 40px 0px" },
-  );
-
-  nodos.forEach((nodo) => {
-    observador.observe(nodo);
-  });
-}
-
-/**
- * La barra ámbar usa scaleX (GPU). 0 = arriba, 1 = final de la página.
+ * La barra de luz usa scaleX (GPU). 0 = arriba, 1 = final de la página.
  */
 function iniciarTinta(sinMovimiento: boolean): void {
   const barra = document.getElementById("scroll-ink-bar");
@@ -162,5 +131,4 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
 
 iniciarFecha();
 iniciarGalería();
-iniciarRevelado(reduceMotion);
 iniciarTinta(reduceMotion);

@@ -2,22 +2,18 @@
 import { herramientas } from "../data/herramientas";
 ---
 
-<section id="herramientas" class="block-dim py-14">
+<section id="herramientas" class="block-dim py-16 desk:py-24">
   <div class="wrap">
-    <p class="m-0 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-ambar">
-      Con qué trabajo
-    </p>
-    <h2
-      class="mt-[0.35rem] mb-[0.6rem] font-display text-[clamp(2rem,5vw,3.2rem)] font-extrabold tracking-[-0.03em] text-papel"
-    >
-      Herramientas
-    </h2>
-    <p class="mb-8 max-w-[38rem] text-crema">Lo que uso en el día a día, agrupado por capa.</p>
+    <header class="section-head">
+      <h2>Herramientas</h2>
+      <p>Lo que uso en el día a día, agrupado por capa.</p>
+    </header>
 
-    <div class="pegboard grid grid-cols-1 gap-4 desk:grid-cols-3">
+    {/* Tres columnas tipo créditos finales, no un tablero de clavijas. */}
+    <div class="pegboard grid grid-cols-1 gap-8 desk:grid-cols-3">
       {
         herramientas.map((capa) => (
-          <div class="peg-col reveal">
+          <div class="credit-col">
             <h3>{capa.titulo}</h3>
             <ul>
               {capa.items.map((item) => (

@@ -2,6 +2,7 @@
 /**
  * Recorre `proyectos.ts` y pinta una ficha por cada uno.
  * El HTML de la tarjeta se escribe UNA vez; los datos viven aparte.
+ * Visualmente es un listado (título + sinopsis), no dos cards gemelas.
  */
 import { proyectos, type Sello } from "../data/proyectos";
 import Ticket from "./Ticket.astro";
@@ -14,26 +15,21 @@ const tonoPorSello: Record<Sello, "amber" | "teal" | "red"> = {
 };
 ---
 
-<section id="proyectos" class="py-14">
+<section id="proyectos" class="py-16 desk:py-24">
   <div class="wrap">
-    <p class="m-0 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-ambar">
-      También construí
-    </p>
-    <h2
-      class="mt-[0.35rem] mb-[0.6rem] font-display text-[clamp(2rem,5vw,3.2rem)] font-extrabold tracking-[-0.03em] text-papel"
-    >
-      Otros proyectos
-    </h2>
-    <p class="mb-8 max-w-[38rem] text-crema">
-      El PHP fue el primer sistema. El MCP es una herramienta de escritorio, aparte del taller.
-    </p>
+    <header class="section-head">
+      <h2>Otros proyectos</h2>
+      <p>
+        El PHP fue el primer sistema. El MCP es una herramienta de escritorio, aparte del taller.
+      </p>
+    </header>
 
-    <div class="order-grid grid grid-cols-1 gap-5 desk:grid-cols-2">
+    <div class="order-grid grid grid-cols-1 gap-10 desk:grid-cols-2">
       {
         proyectos.map((proyecto) => (
-          <Ticket class="reveal">
-            <header class="mb-3.5 flex items-center justify-between gap-4">
-              <p class="kicker">{proyecto.slug}</p>
+          <Ticket>
+            <header class="mb-3 flex items-baseline justify-between gap-4">
+              <p class="m-0 italic text-crema">{proyecto.slug}</p>
               <Stamp tono={tonoPorSello[proyecto.sello]} texto={proyecto.selloTexto} />
             </header>
             <h3>{proyecto.titulo}</h3>

@@ -3,15 +3,15 @@ import { sitio } from "../data/sitio";
 import Ticket from "./Ticket.astro";
 ---
 
-<section id="contacto" class="py-14 pb-[3.5rem]">
+<section id="contacto" class="py-16 pb-20 desk:py-24">
   <div class="wrap">
-    <Ticket class="ticket-end reveal">
-      <p class="kicker">Contacto</p>
+    <Ticket class="panel-end">
+      <p class="m-0 italic text-crema">Contacto</p>
       <h2>Hablemos</h2>
       <p>
         Si quieres ver código o platicar de un proyecto, escríbeme. SIGMA está en GitHub.
       </p>
-      <div class="mt-[1.4rem] flex flex-wrap justify-center gap-[0.7rem]">
+      <div class="hero-actions mt-[1.6rem] flex flex-wrap justify-center gap-[0.7rem]">
         <a class="btn btn-ink" href={`mailto:${sitio.email}`}>{sitio.email}</a>
         <a class="btn btn-ghost" href={sitio.github} rel="noopener noreferrer">GitHub</a>
       </div>

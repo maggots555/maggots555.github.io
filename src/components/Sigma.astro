@@ -1,4 +1,9 @@
 ---
+/**
+ * SIGMA es el “largometraje”: mismo texto, otra puesta en escena.
+ * Los módulos van numerados porque sí son una secuencia
+ * (ingreso → almacén → calidad → portal).
+ */
 import { sitio } from "../data/sitio";
 import Ticket from "./Ticket.astro";
 import Stamp from "./Stamp.astro";
@@ -48,28 +53,23 @@ const modulos = [
 ];
 ---
 
-<section id="sigma" class="block-dim py-14">
+<section id="sigma" class="block-dim py-16 desk:py-24">
   <div class="wrap">
-    <p class="m-0 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-ambar">
-      Proyecto insignia
-    </p>
-    <h2
-      class="mt-[0.35rem] mb-[0.6rem] font-display text-[clamp(2rem,5vw,3.2rem)] font-extrabold tracking-[-0.03em] text-papel"
-    >
-      SIGMA
-    </h2>
-    <p class="mb-8 max-w-[38rem] text-crema">
-      Sistema Integrado de Gestión Técnica y Control de Calidad. Lo diseñé, lo
-      programé y lo mantengo en producción.
-    </p>
+    <header class="section-head">
+      <h2>SIGMA</h2>
+      <p>
+        Sistema Integrado de Gestión Técnica y Control de Calidad. Lo diseñé, lo
+        programé y lo mantengo en producción.
+      </p>
+    </header>
 
-    <Ticket class="reveal">
-      <header class="mb-3.5 flex items-center justify-between gap-4">
-        <p class="kicker">inventario-calidad-django</p>
+    <Ticket>
+      <header class="mb-6 flex items-baseline justify-between gap-4">
+        <p class="m-0 italic text-crema">inventario-calidad-django</p>
         <Stamp tono="teal" texto="En producción" />
       </header>
 
-      <div class="case-grid mt-3.5 grid grid-cols-1 gap-5 desk:grid-cols-3">
+      <div class="case-grid mt-2 grid grid-cols-1 gap-8 desk:grid-cols-3">
         {
           caso.map((bloque) => (
             <div>
@@ -85,7 +85,7 @@ const modulos = [
           <li>{chip}</li>
         ))}
       </ul>
-      <div class="mt-[1.4rem] flex flex-wrap gap-[0.7rem]">
+      <div class="mt-[1.6rem] flex flex-wrap gap-[0.7rem]">
         <a class="btn btn-ink" href={sitio.sigmaRepo} rel="noopener noreferrer">Ver código</a>
         <a
           class="btn btn-ghost"
@@ -99,10 +99,10 @@ const modulos = [
 
     <Gallery />
 
-    <ul class="module-list mt-[1.4rem] grid list-none grid-cols-1 gap-4 p-0 desk:grid-cols-2">
+    <ul class="module-list mt-8 grid list-none grid-cols-1 gap-0 p-0 desk:grid-cols-2 desk:gap-x-12">
       {
         modulos.map((mod) => (
-          <li class="reveal">
+          <li>
             <span class="mod-id">{mod.id}</span>
             <div>
               <h3>{mod.titulo}</h3>

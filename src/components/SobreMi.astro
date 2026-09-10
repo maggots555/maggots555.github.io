@@ -2,21 +2,16 @@
 import Ticket from "./Ticket.astro";
 ---
 
-<section id="sobre-mi" class="py-14">
+<section id="sobre-mi" class="py-16 desk:py-24">
   <div class="wrap">
-    <p class="m-0 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-ambar">
-      Quién soy
-    </p>
-    <h2
-      class="mt-[0.35rem] mb-[0.6rem] font-display text-[clamp(2rem,5vw,3.2rem)] font-extrabold tracking-[-0.03em] text-papel"
-    >
-      Sobre mí
-    </h2>
-    <p class="mb-8 max-w-[38rem] text-crema">
-      La historia corta: empecé en operación y datos, y de ahí pasé a construir software.
-    </p>
+    <header class="section-head">
+      <h2>Sobre mí</h2>
+      <p>
+        La historia corta: empecé en operación y datos, y de ahí pasé a construir software.
+      </p>
+    </header>
 
-    <Ticket class="reveal">
+    <Ticket>
       <p>
         Estudié la carrera técnica en informática en CONALEP (2010–2013). De 2017
         a 2019 coordiné operaciones en SIC México (órdenes, logística, garantías).
@@ -25,8 +20,8 @@ import Ticket from "./Ticket.astro";
       </p>
       <p>
         En 2023 empecé a construir el sistema que el Excel ya no aguantaba.
-        Primero un prototipo en <strong>PHP, MySQL y XAMPP</strong> (el stack con
-        el que aprendí). Después reconstruí el flujo en <strong>Django</strong>:
+        Primero un prototipo en <strong class="text-papel">PHP, MySQL y XAMPP</strong> (el stack con
+        el que aprendí). Después reconstruí el flujo en <strong class="text-papel">Django</strong>:
         eso es SIGMA, un sistema en producción y la obra con la que me presento.
       </p>
     </Ticket>

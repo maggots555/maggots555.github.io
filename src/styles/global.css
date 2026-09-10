@@ -3,37 +3,39 @@
   -----------------------------
   Tailwind v4 entra con `@import "tailwindcss"`.
   `@theme` enseña a Tailwind NUESTRA paleta (no la genérica del tutorial).
-  El CSS de oficio (ticket, sello, grano, galería) se queda aquí porque
-  no cabe en una clase suelta de Tailwind.
+
+  Dirección visual: chiaroscuro (luz contra vacío), como el cuadro de
+  referencia. Un solo gesto fuerte: el nombre en el hero. El resto son
+  créditos. Nada de fichas de papel, sellos de goma ni pegboard.
 */
 
 @import "tailwindcss";
 
 /*
-  Tokens del taller.
+  Tokens de la sala.
   En el HTML puedes usar: bg-fondo, text-papel, font-display, desk:grid-cols-2
-  compact = 520px, desk = 860px (los mismos cortes que el CSS viejo).
+  compact = 520px, desk = 860px.
 */
 @theme {
-  --color-fondo: #14110e;
-  --color-fondo-alto: #1c1814;
-  --color-acero: #2a2520;
-  --color-papel: #efe6d4;
-  --color-papel-borde: #d9cdb4;
-  --color-tinta: #1a1612;
-  --color-tinta-suave: #4a433a;
-  --color-ambar: #e59b2d;
-  --color-patina: #2eb8a8;
-  --color-sello: #c4452e;
-  --color-led: #8bc34a;
-  --color-crema: #c4b9a2;
+  --color-fondo: #0c0b0a;
+  --color-fondo-alto: #141210;
+  --color-acero: #1c1916;
+  --color-papel: #f0e6d8;
+  --color-papel-borde: #2e2a26;
+  --color-tinta: #0c0b0a;
+  --color-tinta-suave: #8a8178;
+  --color-ambar: #c9b49a;
+  --color-patina: #9a8b78;
+  --color-sello: #8f4e44;
+  --color-led: #c9b49a;
+  --color-crema: #7a736c;
 
-  --font-display: "Bricolage Grotesque", "Arial Black", sans-serif;
-  --font-body: "Source Serif 4", Georgia, serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-display: "Fraunces", "Times New Roman", serif;
+  --font-body: "Newsreader", Georgia, serif;
+  --font-mono: "Newsreader", Georgia, serif;
 
-  --shadow-ficha: 0 18px 50px rgba(0, 0, 0, 0.35);
-  --radius-ficha: 4px;
+  --shadow-ficha: 0 0 0 transparent;
+  --radius-ficha: 0;
 
   --breakpoint-compact: 32.5rem;
   --breakpoint-desk: 53.75rem;
@@ -41,24 +43,21 @@
 
 /*
   Alias cortos para el CSS de oficio.
-  Así el resto del archivo se lee como antes: var(--ticket), var(--amber).
+  Así el resto del archivo se lee: var(--bg), var(--papel), var(--luz).
 */
 :root {
   --bg: var(--color-fondo);
   --bg-raised: var(--color-fondo-alto);
   --steel: var(--color-acero);
-  --ticket: var(--color-papel);
-  --ticket-edge: var(--color-papel-borde);
+  --papel: var(--color-papel);
+  --papel-borde: var(--color-papel-borde);
   --ink: var(--color-tinta);
   --ink-soft: var(--color-tinta-suave);
-  --amber: var(--color-ambar);
-  --teal: var(--color-patina);
+  --luz: var(--color-ambar);
+  --patina: var(--color-patina);
   --stamp: var(--color-sello);
-  --led: var(--color-led);
   --cream-dim: var(--color-crema);
-  --shadow: var(--shadow-ficha);
-  --radius: var(--radius-ficha);
-  --wrap: 1120px;
+  --wrap: 1180px;
 }
 
 html {
@@ -68,14 +67,25 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
+  overflow-x: clip;
+  /* Haz de luz, como el que entra por la izquierda del cuadro. */
   background:
-    radial-gradient(1200px 600px at 10% -10%, rgba(229, 155, 45, 0.12), transparent 55%),
-    radial-gradient(800px 500px at 110% 20%, rgba(46, 184, 168, 0.08), transparent 50%),
+    linear-gradient(
+      118deg,
+      transparent 36%,
+      rgba(201, 180, 154, 0.07) 48%,
+      transparent 62%
+    ),
+    radial-gradient(
+      900px 640px at 78% 32%,
+      rgba(201, 180, 154, 0.1),
+      transparent 58%
+    ),
     var(--bg);
-  color: var(--ticket);
+  color: var(--papel);
   font-family: var(--font-body);
-  font-size: 1.05rem;
-  line-height: 1.65;
+  font-size: 1.08rem;
+  line-height: 1.7;
 }
 
 img {
@@ -87,19 +97,19 @@ a {
 }
 
 :focus-visible {
-  outline: 2px solid var(--amber);
+  outline: 1px solid var(--luz);
   outline-offset: 3px;
 }
 
-/* Textura de grano: se siente como metal sucio de banco */
+/* Grano de película: muy suave, no compite con la figura. */
 .grain {
   pointer-events: none;
   position: fixed;
   inset: 0;
-  z-index: 8;
-  opacity: 0.09;
+  z-index: 1;
+  opacity: 0.045;
   mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E");
 }
 
 .skip-link {
@@ -108,9 +118,9 @@ a {
   top: -4rem;
   z-index: 20;
   padding: 0.6rem 1rem;
-  background: var(--amber);
+  background: var(--papel);
   color: var(--ink);
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   text-decoration: none;
 }
 
@@ -118,30 +128,28 @@ a {
   top: 1rem;
 }
 
-/* Ancho máximo del contenido (1120px, con margen a los lados) */
 .wrap {
-  width: min(100% - 2rem, var(--wrap));
+  width: min(100% - 2.4rem, var(--wrap));
   margin-inline: auto;
 }
 
-/* ---------- Cabecera tipo ficha ---------- */
+/* ---------- Cabecera: casi invisible, como créditos de apertura ---------- */
 .mast {
   position: sticky;
   top: 0;
   z-index: 10;
-  border-bottom: 1px solid rgba(239, 230, 212, 0.12);
-  background: rgba(20, 17, 14, 0.88);
-  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(228, 214, 198, 0.08);
+  background: rgba(12, 11, 10, 0.78);
+  backdrop-filter: blur(12px);
 }
 
-/* Tinta de recorrido: se estira de izquierda a derecha con el scroll */
 .scroll-ink {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 2px;
-  background: rgba(239, 230, 212, 0.08);
+  height: 1px;
+  background: rgba(228, 214, 198, 0.08);
   pointer-events: none;
 }
 
@@ -149,7 +157,7 @@ a {
   display: block;
   height: 100%;
   width: 100%;
-  background: var(--amber);
+  background: var(--luz);
   transform: scaleX(0);
   transform-origin: left center;
 }
@@ -157,30 +165,31 @@ a {
 .brand-mark {
   display: grid;
   place-items: center;
-  width: 2.4rem;
-  height: 2.4rem;
-  border: 1.5px solid var(--amber);
-  color: var(--amber);
+  width: 2.1rem;
+  height: 2.1rem;
+  border: 1px solid rgba(228, 214, 198, 0.35);
+  color: var(--papel);
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 0.85rem;
-  letter-spacing: 0.04em;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
 }
 
 .brand-copy strong {
   font-family: var(--font-display);
   font-size: 1rem;
+  font-weight: 600;
 }
 
 .brand-copy small {
   color: var(--cream-dim);
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-style: italic;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
-/* Subrayado ámbar del menú (el ::after no se puede hacer limpio en Tailwind) */
 .nav a {
   position: relative;
   text-decoration: none;
@@ -192,10 +201,10 @@ a {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -0.25rem;
+  bottom: -0.2rem;
   width: 100%;
   height: 1px;
-  background: var(--amber);
+  background: var(--luz);
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 0.2s ease;
@@ -203,7 +212,7 @@ a {
 
 .nav a:hover,
 .nav a:focus-visible {
-  color: var(--amber);
+  color: var(--papel);
 }
 
 .nav a:hover::after,
@@ -211,315 +220,358 @@ a {
   transform: scaleX(1);
 }
 
-/* ---------- Tickets (papel) ---------- */
-.ticket {
+/* ---------- Paneles (ya no son tickets de papel) ---------- */
+.panel {
   position: relative;
-  padding: 1.75rem 1.6rem 1.9rem;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      transparent,
-      transparent 11px,
-      rgba(196, 185, 162, 0.18) 11px,
-      rgba(196, 185, 162, 0.18) 12px
-    ),
-    var(--ticket);
-  color: var(--ink);
-  box-shadow: var(--shadow);
-  border-radius: var(--radius);
-  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  padding: 0;
+  background: transparent;
+  color: var(--papel);
+  box-shadow: none;
+  border-radius: 0;
 }
 
-.ticket:hover {
-  transform: translateY(-3px);
+.panel p {
+  color: var(--ink-soft);
+  max-width: 62ch;
 }
 
-.ticket-hero:hover {
+.panel p + p {
+  margin-top: 0.9rem;
+}
+
+.panel-hero {
+  padding: 0;
+}
+
+/* Estado: una cursiva, no un sello de goma. */
+.stamp {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
   transform: none;
 }
 
-.ticket-perforation {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: -7px;
-  height: 14px;
-  background-image: radial-gradient(circle, var(--bg) 5px, transparent 5.5px);
-  background-size: 22px 14px;
-  background-position: 8px 0;
-}
-
-.kicker {
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-}
-
-.stamp {
-  margin: 0;
-  padding: 0.2rem 0.55rem;
-  border: 2px solid currentColor;
-  font-family: var(--font-display);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  transform: rotate(-3deg);
-}
-
-.stamp-amber { color: #b45309; }
-.stamp-teal { color: #0f766e; }
+.stamp-amber { color: var(--luz); }
+.stamp-teal { color: var(--patina); }
 .stamp-red { color: var(--stamp); }
 
 h1, h2, h3 {
   font-family: var(--font-display);
-  font-weight: 800;
-  line-height: 1.08;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-optical-sizing: auto;
+}
+
+/* El gesto: el nombre ocupa la sala (solo en el hero; 404 usa .title-page). */
+h1 {
+  margin: 0 0 1.4rem;
+}
+
+.hero h1 {
+  font-size: clamp(2.8rem, 8vw, 6.4rem);
+  font-weight: 600;
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  text-shadow: 0 2px 28px rgba(12, 11, 10, 0.7);
+}
+
+/* Títulos de página (404): grandes, pero no tanto como el cartel del home. */
+.title-page {
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  line-height: 1.05;
   letter-spacing: -0.03em;
 }
 
-h1 {
-  margin: 0.2rem 0 1rem;
-  font-size: clamp(2rem, 5.2vw, 3.4rem);
+.hero-soy {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-family: var(--font-body);
+  font-size: 0.28em;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1;
+  color: var(--luz);
+}
+
+.hero-name {
+  display: block;
+  white-space: nowrap;
 }
 
 h1 em {
   display: block;
-  margin-top: 0.55rem;
-  font-size: 0.52em;
+  margin-top: 0.7rem;
+  font-family: var(--font-body);
+  font-size: 0.28em;
   font-style: italic;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: #9a3412;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--ink-soft);
 }
 
 .lede {
-  max-width: 40rem;
-  font-size: 1.12rem;
+  max-width: 36rem;
+  font-size: 1.15rem;
   color: var(--ink-soft);
-}
-
-.ticket p {
-  color: var(--ink-soft);
-}
-
-.ticket p + p {
-  margin-top: 0.85rem;
 }
 
 .btn {
   display: inline-flex;
   align-items: center;
-  padding: 0.7rem 1.15rem;
-  border: 2px solid var(--ink);
+  padding: 0.65rem 1.15rem;
+  border: 1px solid var(--papel);
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 600;
+  font-size: 0.95rem;
   text-decoration: none;
-  letter-spacing: 0.02em;
-  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
-}
-
-.btn:hover,
-.btn:focus-visible {
-  transform: translate(-2px, -2px);
+  letter-spacing: 0.01em;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .btn:active {
-  transform: scale(0.97);
+  transform: none;
+  opacity: 0.85;
 }
 
 .btn-ink {
-  background: var(--ink);
-  color: var(--ticket);
+  background: var(--papel);
+  color: var(--ink);
 }
 
 .btn-ink:hover,
 .btn-ink:focus-visible {
-  background: var(--amber);
-  border-color: var(--amber);
+  background: var(--luz);
+  border-color: var(--luz);
   color: var(--ink);
 }
 
 .btn-ghost {
   background: transparent;
+  color: var(--papel);
+}
+
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+  background: var(--papel);
   color: var(--ink);
 }
 
-.ticket .btn-ghost:hover {
-  background: var(--ink);
-  color: var(--ticket);
+.meta-row {
+  max-width: 36rem;
 }
 
 .meta-row dt {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-}
-
-.meta-row dd {
-  margin: 0.15rem 0 0;
-  font-family: var(--font-display);
-  font-weight: 700;
-}
-
-.led {
-  display: inline-block;
-  width: 0.55rem;
-  height: 0.55rem;
-  margin-right: 0.35rem;
-  border-radius: 50%;
-  background: var(--led);
-  box-shadow: 0 0 8px var(--led);
-  animation: pulse 1.8s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  50% { opacity: 0.45; }
-}
-
-.hero .ticket-hero {
-  animation: ticketDrop 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.hero .scope {
-  animation: scopeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
-}
-
-.hero .stamp {
-  animation: stampHit 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.32s both;
-}
-
-@keyframes ticketDrop {
-  from {
-    opacity: 0;
-    transform: translateY(-26px) rotate(-1.1deg);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes scopeIn {
-  from {
-    opacity: 0;
-    transform: translateX(16px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes stampHit {
-  0% {
-    opacity: 0;
-    transform: rotate(-14deg) scale(1.2);
-  }
-  55% {
-    opacity: 1;
-    transform: rotate(-1deg) scale(0.96);
-  }
-  100% {
-    opacity: 1;
-    transform: rotate(-3deg) scale(1);
-  }
-}
-
-.scope {
-  padding: 1.4rem 1.3rem;
-  background:
-    linear-gradient(180deg, rgba(46, 184, 168, 0.08), transparent 40%),
-    var(--bg-raised);
-  border: 1px solid rgba(46, 184, 168, 0.28);
-  box-shadow: inset 0 0 40px rgba(46, 184, 168, 0.06);
-}
-
-.scope-label {
-  margin: 0 0 1rem;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--teal);
-}
-
-.scope-stats {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 0.85rem;
-}
-
-.scope-stats li {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding-bottom: 0.7rem;
-  border-bottom: 1px solid rgba(239, 230, 212, 0.1);
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-style: italic;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--cream-dim);
 }
 
-.scope-stats strong {
+.meta-row dd {
+  margin: 0.1rem 0 0;
   font-family: var(--font-display);
-  font-size: 1.35rem;
-  color: var(--ticket);
-  letter-spacing: -0.04em;
+  font-weight: 600;
+  font-size: 1.05rem;
 }
 
-.scope-foot {
-  margin: 1.1rem 0 0;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
+/* ---------- Hero: vacío a la izquierda, figura a la derecha ---------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: calc(100svh - 4.6rem);
+  padding: 2.4rem 0 2.8rem;
+  display: flex;
+  align-items: center;
+}
+
+.hero-atmosphere {
+  position: absolute;
+  inset: 0 0 auto auto;
+  width: min(56%, 720px);
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-atmosphere img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 82% 28%;
+  opacity: 0.92;
+}
+
+/*
+  Velos del mismo color del fondo: la figura nace del negro
+  (izquierda y abajo), sin pelear con mask-composite.
+*/
+.hero-atmosphere::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, var(--bg) 0%, rgba(12, 11, 10, 0.5) 10%, transparent 36%),
+    linear-gradient(180deg, transparent 62%, var(--bg) 100%);
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 2;
+  width: min(100% - 2.4rem, var(--wrap));
+  margin-inline: auto;
+  max-width: 100%;
+}
+
+/* En escritorio el texto se queda en el vacío; la columna vacía reserva la figura. */
+@media (min-width: 53.75rem) {
+  .hero-copy {
+    display: grid;
+    grid-template-columns: minmax(0, 36rem) 1fr;
+    column-gap: 1.5rem;
+  }
+
+  .hero-copy > * {
+    grid-column: 1;
+  }
+}
+
+.hero-main {
+  max-width: 38rem;
+}
+
+.hero-credits {
+  margin: 1.6rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.55rem 2rem;
+  max-width: 26rem;
+}
+
+.hero-credits li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(228, 214, 198, 0.12);
+  font-size: 0.92rem;
+  color: var(--cream-dim);
+}
+
+.hero-credits strong {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--papel);
+  letter-spacing: -0.03em;
+}
+
+.hero-foot {
+  margin: 1rem 0 0;
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--cream-dim);
+}
+
+/*
+  Una sola orquestación: el título aparece como si lo iluminaran.
+  No hay fade en cada sección (eso se siente de plantilla).
+*/
+.hero-soy,
+.hero-name,
+h1 em,
+.hero .lede,
+.hero .hero-actions,
+.hero-credits {
+  animation: titleReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-name:nth-child(2) { animation-delay: 0.08s; }
+.hero-name:nth-child(3) { animation-delay: 0.14s; }
+.hero-name:nth-child(4) { animation-delay: 0.2s; }
+h1 em { animation-delay: 0.28s; }
+.hero .lede { animation-delay: 0.32s; }
+.hero .hero-actions { animation-delay: 0.4s; }
+.hero-credits { animation-delay: 0.48s; }
+
+@keyframes titleReveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Encabezado de sección: el h2 es el gráfico, sin ceja en versales. */
+.section-head h2 {
+  margin: 0 0 0.55rem;
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
+  font-weight: 600;
+}
+
+.section-head p {
+  margin: 0 0 2.2rem;
+  max-width: 38rem;
   color: var(--cream-dim);
 }
 
 .block-dim {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.18), transparent);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.28), transparent 70%);
 }
 
 .case-grid h3 {
   margin: 0 0 0.4rem;
-  font-size: 1.05rem;
+  font-size: 1.35rem;
+  font-weight: 600;
 }
 
 .case-grid p {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 0.98rem;
+  font-size: 1rem;
 }
 
 .chip-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
-  margin: 1.1rem 0 0;
+  gap: 0.35rem 1.15rem;
+  margin: 1.4rem 0 0;
   padding: 0;
   list-style: none;
 }
 
 .chip-list li {
-  padding: 0.22rem 0.55rem;
-  border: 1px solid var(--ink);
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  padding: 0;
+  border: 0;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-style: italic;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--luz);
 }
 
 .shot {
   margin: 0;
   overflow: hidden;
   background: var(--bg-raised);
-  border: 1px solid rgba(239, 230, 212, 0.12);
+  border: 1px solid rgba(228, 214, 198, 0.1);
   cursor: zoom-in;
 }
 
@@ -529,16 +581,16 @@ h1 em {
   height: 220px;
   object-fit: cover;
   object-position: top center;
-  background: #1a1612;
-  transition: transform 0.25s ease;
+  background: #0c0b0a;
+  transition: opacity 0.25s ease;
 }
 
 .shot:hover img {
-  transform: scale(1.04);
+  opacity: 0.88;
 }
 
 .shot.is-empty:hover img {
-  transform: none;
+  opacity: 1;
 }
 
 .shot-gallery li:first-child {
@@ -546,15 +598,16 @@ h1 em {
 }
 
 .shot-gallery li:first-child img {
-  height: 320px;
+  height: 340px;
 }
 
 .shot figcaption {
-  padding: 0.55rem 0.75rem 0.7rem;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  padding: 0.55rem 0 0.2rem;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-style: italic;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--cream-dim);
 }
 
@@ -568,39 +621,33 @@ h1 em {
   height: 220px;
   padding: 1rem;
   color: var(--cream-dim);
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.04em;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-style: italic;
   text-align: center;
   white-space: pre-line;
-  background:
-    repeating-linear-gradient(
-      -45deg,
-      transparent,
-      transparent 8px,
-      rgba(239, 230, 212, 0.04) 8px,
-      rgba(239, 230, 212, 0.04) 9px
-    );
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 8px,
+    rgba(228, 214, 198, 0.03) 8px,
+    rgba(228, 214, 198, 0.03) 9px
+  );
 }
 
 .lightbox {
-  /*
-    Tailwind v4 pone margin: 0 a *todos* los elementos (preflight).
-    El <dialog> nativo se centra con margin: auto; sin eso queda
-    pegado arriba a la izquierda.
-  */
   margin: auto;
   width: min(96vw, 1100px);
   max-height: 92vh;
   padding: 1rem 1rem 1.1rem;
   border: 0;
-  background: var(--ticket);
-  color: var(--ink);
-  box-shadow: var(--shadow);
+  background: var(--bg-raised);
+  color: var(--papel);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
 }
 
 .lightbox::backdrop {
-  background: rgba(12, 10, 8, 0.78);
+  background: rgba(8, 7, 6, 0.86);
 }
 
 .lightbox[open] {
@@ -614,7 +661,7 @@ h1 em {
 @keyframes lightboxIn {
   from {
     opacity: 0;
-    transform: scale(0.96);
+    transform: scale(0.98);
   }
   to {
     opacity: 1;
@@ -632,95 +679,107 @@ h1 em {
   width: 100%;
   max-height: 72vh;
   object-fit: contain;
-  background: #1a1612;
+  background: #0c0b0a;
 }
 
 .lightbox-cap {
   margin: 0.7rem 0 0.9rem;
   font-size: 0.95rem;
+  font-style: italic;
   color: var(--ink-soft);
 }
 
 .module-list li {
   display: flex;
-  gap: 1rem;
-  padding: 1.1rem 1.15rem;
-  background: var(--bg-raised);
-  border: 1px solid rgba(239, 230, 212, 0.1);
+  gap: 1.15rem;
+  padding: 1.15rem 0;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid rgba(228, 214, 198, 0.12);
 }
 
 .mod-id {
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  color: var(--amber);
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: var(--luz);
+  line-height: 1;
 }
 
 .module-list h3 {
   margin: 0 0 0.25rem;
-  font-size: 1.15rem;
+  font-size: 1.25rem;
 }
 
 .module-list p {
   margin: 0;
   color: var(--cream-dim);
-  font-size: 0.95rem;
+  font-size: 0.98rem;
+}
+
+.order-grid .panel {
+  padding: 0 0 1.6rem;
+  border-bottom: 1px solid rgba(228, 214, 198, 0.12);
 }
 
 .order-grid h3 {
-  margin: 0.2rem 0 0.7rem;
-  font-size: 1.55rem;
+  margin: 0.15rem 0 0.7rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
 }
 
-.peg-col {
-  padding: 1.2rem 1.1rem 1.4rem;
-  background:
-    radial-gradient(circle at 12px 12px, #3a342c 2px, transparent 2.4px),
-    var(--steel);
-  background-size: 24px 24px;
-  border: 1px solid rgba(239, 230, 212, 0.08);
+/* Rodillo de créditos: tres columnas, sin notas de pegboard. */
+.credit-col {
+  padding: 1.1rem 0 0;
+  background: none;
+  border: 0;
+  border-top: 1px solid rgba(228, 214, 198, 0.18);
 }
 
-.peg-col h3 {
-  margin: 0 0 0.8rem;
+.credit-col h3 {
+  margin: 0 0 0.7rem;
+  font-family: var(--font-body);
   font-size: 1.05rem;
-  color: var(--amber);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--papel);
+  letter-spacing: 0;
 }
 
-.peg-col ul {
+.credit-col ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.peg-col li {
-  margin-bottom: 0.45rem;
-  padding: 0.4rem 0.55rem;
-  background: var(--ticket);
-  color: var(--ink);
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.92rem;
-  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
+.credit-col li {
+  margin: 0;
+  padding: 0.22rem 0;
+  background: none;
+  color: var(--cream-dim);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1rem;
+  box-shadow: none;
 }
 
-.ticket-end {
+.panel-end {
   text-align: center;
-  padding-block: 2.6rem;
+  padding-block: 4rem 2rem;
 }
 
-.ticket-end h2 {
-  margin: 0.4rem auto 0.8rem;
+.panel-end h2 {
+  margin: 0.3rem auto 0.8rem;
   max-width: 12ch;
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-size: clamp(2.6rem, 7vw, 5rem);
 }
 
-.ticket-end p {
-  max-width: 36rem;
+.panel-end p {
+  max-width: 34rem;
   margin-inline: auto;
   color: var(--ink-soft);
 }
 
-.ticket-end .hero-actions {
+.panel-end .hero-actions {
   justify-content: center;
 }
 
@@ -728,45 +787,55 @@ h1 em {
   margin: 0;
 }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(14px);
-  transition:
-    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
+@media (max-width: 53.74rem) {
+  .hero {
+    min-height: auto;
+    align-items: stretch;
+    flex-direction: column;
+    padding: 0 0 2.4rem;
+  }
 
-.reveal.is-in {
-  opacity: 1;
-  transform: none;
-}
+  .hero-atmosphere {
+    position: relative;
+    width: 100%;
+    height: 38vh;
+    min-height: 200px;
+    margin-bottom: 0;
+  }
 
-.module-list .reveal:nth-child(2) { transition-delay: 0.07s; }
-.module-list .reveal:nth-child(3) { transition-delay: 0.14s; }
-.module-list .reveal:nth-child(4) { transition-delay: 0.21s; }
-.pegboard .reveal:nth-child(2) { transition-delay: 0.07s; }
-.pegboard .reveal:nth-child(3) { transition-delay: 0.14s; }
+  .hero-atmosphere img {
+    object-position: 70% 18%;
+  }
 
-.ticket.reveal.is-in:hover {
-  transform: translateY(-3px);
+  /* En móvil la figura queda ARRIBA, el nombre ABAJO: no se montan. */
+  .hero-atmosphere::after {
+    background: linear-gradient(180deg, transparent 35%, var(--bg) 96%);
+  }
+
+  .hero-copy {
+    padding-top: 0.4rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 12vw, 3.5rem);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 
-  .reveal,
-  .hero .ticket-hero,
-  .hero .scope,
-  .hero .stamp,
+  .hero-soy,
+  .hero-name,
+  h1 em,
+  .hero .lede,
+  .hero .hero-actions,
+  .hero-credits,
   .lightbox[open],
   .lightbox[open]::backdrop {
     animation: none;
     opacity: 1;
     transform: none;
-    transition: none;
   }
-
-  .led { animation: none; }
 
   .scroll-ink span {
     transform: none;
