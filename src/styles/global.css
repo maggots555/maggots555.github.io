@@ -275,6 +275,8 @@ h1 {
 }
 
 .hero h1 {
+  width: max-content;
+  max-width: 100%;
   font-size: clamp(2.8rem, 8vw, 6.4rem);
   font-weight: 600;
   line-height: 0.92;
@@ -321,6 +323,13 @@ h1 em {
   max-width: 36rem;
   font-size: 1.15rem;
   color: var(--ink-soft);
+  overflow-wrap: break-word;
+}
+
+/* El párrafo del hero no puede ser más ancho que “Jorge Luis” (el recuadro del título). */
+.hero .lede {
+  max-width: 100%;
+  text-wrap: pretty;
 }
 
 .btn {
@@ -375,6 +384,11 @@ h1 em {
 
 .meta-row {
   max-width: 36rem;
+  min-width: 0;
+}
+
+.hero .meta-row {
+  max-width: 100%;
 }
 
 .meta-row dt {
@@ -465,17 +479,28 @@ h1 em {
 @media (min-width: 53.75rem) {
   .hero-copy {
     display: grid;
-    grid-template-columns: minmax(0, 36rem) 1fr;
+    grid-template-columns: min-content minmax(0, 1fr);
     column-gap: 1.5rem;
   }
 
   .hero-copy > * {
     grid-column: 1;
+    min-width: 0;
   }
 }
 
+/*
+  El recuadro del hero mide lo mismo que “Jorge Luis” (min-content).
+  fit-content no sirve: el párrafo en una línea es más largo y estira todo.
+*/
+/*
+  El recuadro nace del nombre (min-content) y le sumamos un poco de aire
+  a la derecha, para que el párrafo no quede tan apretado.
+*/
 .hero-main {
-  max-width: 38rem;
+  width: calc(min-content + 5rem);
+  max-width: 100%;
+  min-width: 0;
 }
 
 .hero-credits {
