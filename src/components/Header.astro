@@ -1,7 +1,8 @@
 ---
 /**
  * Cabecera fija, casi transparente.
- * El folio de la derecha es la fecha de hoy (detalle de créditos, no un número de orden).
+ * El folio de la derecha es la fecha de hoy (detalle de créditos, no un número de orden)
+ * más el clima de Nicolás Romero. data-lat / data-lon los lee el script del navegador.
  *
  * compact: = desde 520px, desk: = desde 860px (ver @theme en global.css).
  */
@@ -39,11 +40,15 @@ const enlaces = [
 
     <p
       class="folio m-0 hidden text-right font-body text-[0.82rem] italic text-crema compact:block"
+      data-lat={sitio.latitud}
+      data-lon={sitio.longitud}
     >
       <span>Hoy</span>
       <time id="folio-fecha" class="block not-italic font-medium text-papel" datetime="2026-09-10">
-        2026-09-10
+        10 de Septiembre del 2026
       </time>
+      <!-- Vacío hasta que llegue Open-Meteo. Si falla la red, se queda oculto. -->
+      <span id="folio-clima" class="folio-clima" hidden></span>
     </p>
   </div>
   <div class="scroll-ink" aria-hidden="true"><span id="scroll-ink-bar"></span></div>

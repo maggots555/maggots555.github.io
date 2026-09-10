@@ -220,6 +220,32 @@ a {
   transform: scaleX(1);
 }
 
+/* Folio: fecha larga + clima. No debe empujar el nav en ~860px. */
+.folio {
+  max-width: 13.6rem;
+  line-height: 1.35;
+  text-wrap: balance;
+}
+
+.folio time {
+  font-size: 0.8rem;
+}
+
+.folio-clima {
+  display: block;
+  margin-top: 0.12rem;
+  font-size: 0.74rem;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--cream-dim);
+  opacity: 0;
+}
+
+.folio-clima.is-listo {
+  opacity: 1;
+  transition: opacity 0.45s ease;
+}
+
 /* ---------- Paneles (ya no son tickets de papel) ---------- */
 .panel {
   position: relative;
@@ -1105,7 +1131,8 @@ html:not(.js-motion) .recorrido ol::before {
   .btn,
   .shot img,
   .shot figcaption,
-  .nav a::after {
+  .nav a::after,
+  .folio-clima.is-listo {
     transition: none;
   }
 

@@ -13,6 +13,10 @@ export const sitio = {
   handle: "maggots555",
   oficio: "Desarrollador",
   ciudad: "Nicolás Romero, MX",
+  // Coordenadas de Nicolás Romero, Edo. Méx.
+  // El header las usa para pedir el clima a Open-Meteo (sin contraseña).
+  latitud: 19.62,
+  longitud: -99.31,
   email: "jorgemahos@gmail.com",
   url: "https://maggots555.github.io/",
   github: "https://github.com/maggots555",
