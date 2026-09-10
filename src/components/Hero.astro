@@ -15,12 +15,12 @@ const meta = [
 ---
 
 <section id="inicio" class="hero">
-  {/* Figura: solo atmósfera. alt vacío porque no aporta información extra. */}
-  <div class="hero-atmosphere" aria-hidden="true">
+  {/* Figura: capa de fondo. data-parallax = qué tanto se atrasa vs el scroll. */}
+  <div class="hero-atmosphere" data-parallax="0.4" data-parallax-min="860" aria-hidden="true">
     <img src="/assets/chiaroscuro.jpg" alt="" width="1024" height="811" />
   </div>
 
-  <div class="hero-copy">
+  <div class="hero-copy" data-parallax="0.14" data-parallax-min="860">
     <Ticket class="panel-hero">
       <div class="hero-main">
         <h1>

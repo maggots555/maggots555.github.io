@@ -6,7 +6,7 @@
  * No habla con Django ni con una base de datos.
  *  1) Fecha de hoy y año del pie.
  *  2) Galería + lightbox.
- *  3) Barra de luz + paralelaje suave de la figura.
+ *  3) Barra de luz + parallax (figura, título, recorrido).
  *  4) Revelar títulos al entrar en pantalla (Intersection Observer).
  *
  * TypeScript nos obliga a preguntar “¿existe este elemento?” antes de usarlo.
@@ -104,12 +104,17 @@ function mostrarPlaceholder(figura: HTMLElement, img: HTMLImageElement): void {
 }
 
 /**
- * Barra de luz (scaleX) + la figura baja un poco más lento que el scroll.
- * Las dos viven en el mismo listener para no disparar trabajo dos veces.
+ * Barra de luz + parallax.
+ *
+ * EXPLICACIÓN:
+ * Parallax = las capas no se mueven al mismo ritmo que el scroll.
+ * La figura se atrasa (parece fondo). El título se atrasa menos.
+ * El recorrido se mueve según su lugar en la pantalla, no desde el tope.
+ * Solo transform (GPU). Si piden menos movimiento, esto no corre.
  */
 function iniciarScroll(sinMovimiento: boolean): void {
   const barra = document.getElementById("scroll-ink-bar");
-  const figura = document.querySelector<HTMLElement>(".hero-atmosphere");
+  const capas = document.querySelectorAll<HTMLElement>("[data-parallax]");
 
   if (sinMovimiento) {
     return;
@@ -130,10 +135,33 @@ function iniciarScroll(sinMovimiento: boolean): void {
     if (barra) {
       barra.style.transform = "scaleX(" + p + ")";
     }
-    if (figura) {
-      const y = Math.min(window.scrollY * 0.2, 110);
-      figura.style.transform = "translate3d(0, " + y + "px, 0)";
-    }
+
+    const yDoc = window.scrollY;
+    const altoVista = window.innerHeight;
+
+    capas.forEach((capa) => {
+      const minimo = Number(capa.getAttribute("data-parallax-min") || "0");
+      if (minimo > 0 && window.innerWidth < minimo) {
+        capa.style.transform = "";
+        return;
+      }
+
+      const velocidad = Number(capa.getAttribute("data-parallax") || "0");
+      if (!velocidad) {
+        return;
+      }
+
+      const local = capa.hasAttribute("data-parallax-local");
+      let y = 0;
+      if (local) {
+        const caja = capa.getBoundingClientRect();
+        const centro = caja.top + caja.height / 2;
+        y = (centro - altoVista / 2) * velocidad;
+      } else {
+        y = yDoc * velocidad;
+      }
+      capa.style.transform = "translate3d(0, " + y.toFixed(1) + "px, 0)";
+    });
   }
 
   function enScroll(): void {
@@ -145,6 +173,7 @@ function iniciarScroll(sinMovimiento: boolean): void {
 
   pintar();
   window.addEventListener("scroll", enScroll, { passive: true });
+  window.addEventListener("resize", enScroll, { passive: true });
 }
 
 /**
