@@ -65,26 +65,18 @@ const recorrido = [
 
       <aside class="recorrido reveal" aria-label="Recorrido">
         <div class="parallax-shift" data-parallax="0.12" data-parallax-local>
-        <p class="recorrido-label">Recorrido</p>
-        {/*
-          SVG: una línea vertical. Al entrar en pantalla se “dibuja”
-          (stroke-dashoffset), como si la luz bajara por el margen.
-        */}
-        <svg class="recorrido-svg" viewBox="0 0 8 100" preserveAspectRatio="none" aria-hidden="true">
-          <line class="recorrido-stroke" x1="4" y1="0" x2="4" y2="100" />
-        </svg>
-        <span class="recorrido-haz" aria-hidden="true"></span>
-        <ol>
-          {
-            recorrido.map((paso) => (
-              <li>
-                <span class="recorrido-periodo">{paso.periodo}</span>
-                <strong>{paso.titulo}</strong>
-                <span class="recorrido-detalle">{paso.detalle}</span>
-              </li>
-            ))
-          }
-        </ol>
+          <p class="recorrido-label">Recorrido</p>
+          <ol>
+            {
+              recorrido.map((paso) => (
+                <li>
+                  <span class="recorrido-periodo">{paso.periodo}</span>
+                  <strong>{paso.titulo}</strong>
+                  <span class="recorrido-detalle">{paso.detalle}</span>
+                </li>
+              ))
+            }
+          </ol>
         </div>
       </aside>
     </div>

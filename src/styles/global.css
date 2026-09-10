@@ -655,11 +655,11 @@ h1 em {
 
 .recorrido {
   position: relative;
-  padding-left: 1.7rem;
 }
 
 .recorrido .parallax-shift {
   position: relative;
+  padding-left: 1.7rem;
 }
 
 .recorrido-label {
@@ -670,68 +670,61 @@ h1 em {
   color: var(--luz);
 }
 
-.recorrido-svg {
-  position: absolute;
-  left: 0;
-  top: 2.4rem;
-  bottom: 0.4rem;
-  width: 8px;
-  height: auto;
-  overflow: visible;
-}
-
-.recorrido-stroke {
-  stroke: rgba(201, 180, 154, 0.35);
-  stroke-width: 1;
-  stroke-linecap: round;
-  fill: none;
-  /* 100 = alto del viewBox; se “dibuja” cuando .is-in */
-  stroke-dasharray: 100;
-  stroke-dashoffset: 100;
-  transition: stroke-dashoffset 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.15s;
-}
-
-.recorrido.is-in .recorrido-stroke,
-.recorrido:not(.reveal) .recorrido-stroke {
-  stroke-dashoffset: 0;
-}
-
-.recorrido-haz {
-  position: absolute;
-  left: 3px;
-  top: 2.4rem;
-  bottom: 0.4rem;
-  width: 2px;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.recorrido-haz::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 28%;
-  background: linear-gradient(
-    180deg,
-    transparent,
-    rgba(240, 230, 216, 0.7),
-    transparent
-  );
-}
-
-.recorrido.is-in .recorrido-haz::after {
-  animation: railSweep 5.5s ease-in-out 0.4s infinite;
-}
-
-html:not(.js-motion) .recorrido-stroke {
-  stroke-dashoffset: 0;
-}
-
 .recorrido ol {
+  position: relative;
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+/*
+  El riel nace de la lista, no de un SVG suelto:
+  top/bottom coinciden con el centro del primer y último punto.
+*/
+.recorrido ol::before {
+  content: "";
+  position: absolute;
+  left: calc(-1.7rem + 3px);
+  top: 0.55rem;
+  bottom: 0.55rem;
+  width: 1px;
+  background: rgba(201, 180, 154, 0.4);
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.12s;
+}
+
+.recorrido.is-in ol::before,
+html:not(.js-motion) .recorrido ol::before {
+  transform: scaleY(1);
+}
+
+/* Haz que recorre el mismo riel, de punto a punto. */
+.recorrido ol::after {
+  content: "";
+  position: absolute;
+  left: calc(-1.7rem + 2px);
+  top: 0.55rem;
+  width: 3px;
+  height: 22%;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(240, 230, 216, 0.8),
+    transparent
+  );
+  opacity: 0;
+}
+
+.recorrido.is-in ol::after {
+  opacity: 1;
+  animation: railSweep 4.8s linear 0.8s infinite;
+}
+
+@keyframes railSweep {
+  from { transform: translateY(0); }
+  to { transform: translateY(360%); }
 }
 
 .recorrido li {
@@ -749,6 +742,7 @@ html:not(.js-motion) .recorrido-stroke {
   position: absolute;
   left: -1.7rem;
   top: 0.45rem;
+  z-index: 1;
   width: 7px;
   height: 7px;
   border-radius: 50%;
@@ -778,11 +772,6 @@ html:not(.js-motion) .recorrido-stroke {
   margin-top: 0.2rem;
   font-size: 0.92rem;
   color: var(--ink-soft);
-}
-
-@keyframes railSweep {
-  from { transform: translateY(-120%); }
-  to { transform: translateY(420%); }
 }
 
 .block-dim {
@@ -1125,12 +1114,12 @@ html:not(.js-motion) .recorrido-stroke {
     width: 0;
   }
 
-  .recorrido-stroke {
-    stroke-dashoffset: 0;
+  .recorrido ol::before {
+    transform: scaleY(1);
     transition: none;
   }
 
-  .recorrido-haz::after {
+  .recorrido ol::after {
     animation: none;
     opacity: 0;
   }
