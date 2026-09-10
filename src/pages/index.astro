@@ -1,0 +1,25 @@
+---
+/**
+ * Página de inicio: solo ensambla las secciones.
+ * El contenido de cada una vive en su componente (o en src/data/).
+ */
+import Layout from "../layouts/Layout.astro";
+import { sitio } from "../data/sitio";
+import Hero from "../components/Hero.astro";
+import SobreMi from "../components/SobreMi.astro";
+import Sigma from "../components/Sigma.astro";
+import Proyectos from "../components/Proyectos.astro";
+import Herramientas from "../components/Herramientas.astro";
+import Contacto from "../components/Contacto.astro";
+---
+
+<Layout title={`${sitio.nombre} — Portafolio`}>
+  <main id="contenido">
+    <Hero />
+    <SobreMi />
+    <Sigma />
+    <Proyectos />
+    <Herramientas />
+    <Contacto />
+  </main>
+</Layout>

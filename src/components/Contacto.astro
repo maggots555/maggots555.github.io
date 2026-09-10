@@ -1,0 +1,20 @@
+---
+import { sitio } from "../data/sitio";
+import Ticket from "./Ticket.astro";
+---
+
+<section id="contacto" class="py-14 pb-[3.5rem]">
+  <div class="wrap">
+    <Ticket class="ticket-end reveal">
+      <p class="kicker">Contacto</p>
+      <h2>Hablemos</h2>
+      <p>
+        Si quieres ver código o platicar de un proyecto, escríbeme. SIGMA está en GitHub.
+      </p>
+      <div class="mt-[1.4rem] flex flex-wrap justify-center gap-[0.7rem]">
+        <a class="btn btn-ink" href={`mailto:${sitio.email}`}>{sitio.email}</a>
+        <a class="btn btn-ghost" href={sitio.github} rel="noopener noreferrer">GitHub</a>
+      </div>
+    </Ticket>
+  </div>
+</section>

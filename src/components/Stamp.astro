@@ -1,0 +1,20 @@
+---
+/**
+ * Sello rotado de la ficha.
+ * `tono` elige el color: amber (activo), teal (producción), red (origen).
+ */
+interface Props {
+  tono: "amber" | "teal" | "red";
+  texto: string;
+}
+
+const { tono, texto } = Astro.props;
+
+const claseTono = {
+  amber: "stamp-amber",
+  teal: "stamp-teal",
+  red: "stamp-red",
+}[tono];
+---
+
+<p class:list={["stamp", claseTono]}>{texto}</p>

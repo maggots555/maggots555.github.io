@@ -1,0 +1,51 @@
+---
+/**
+ * Cabecera fija.
+ * El folio de la derecha es un detalle visual (fecha de hoy), no un número de orden real.
+ *
+ * Las clases largas (grid, flex, uppercase) son Tailwind.
+ * compact: = desde 520px, desk: = desde 860px (ver @theme en global.css).
+ */
+import { sitio } from "../data/sitio";
+
+const enlaces = [
+  { href: "#inicio", label: "Inicio" },
+  { href: "#sobre-mi", label: "Sobre mí" },
+  { href: "#sigma", label: "SIGMA" },
+  { href: "#proyectos", label: "Proyectos" },
+  { href: "#contacto", label: "Contacto" },
+];
+---
+
+<header class="mast">
+  <div
+    class="wrap grid grid-cols-1 items-center gap-5 py-3.5 compact:grid-cols-[1fr_auto] desk:grid-cols-[auto_1fr_auto]"
+  >
+    <a class="flex items-center gap-3 no-underline" href="#inicio">
+      <span class="brand-mark" aria-hidden="true">{sitio.iniciales}</span>
+      <span class="brand-copy flex flex-col leading-[1.15]">
+        <strong>{sitio.nombreCorto}</strong>
+        <small>@{sitio.handle}</small>
+      </span>
+    </a>
+
+    <nav
+      class="nav col-span-full flex flex-wrap justify-start gap-x-[1.1rem] gap-y-[0.35rem] font-mono text-[0.78rem] uppercase tracking-[0.06em] desk:col-span-1 desk:justify-center"
+      aria-label="Secciones"
+    >
+      {enlaces.map((enlace) => (
+        <a href={enlace.href}>{enlace.label}</a>
+      ))}
+    </nav>
+
+    <p
+      class="folio m-0 hidden text-right font-mono text-[0.72rem] uppercase tracking-[0.08em] text-crema compact:block"
+    >
+      <span>Hoy</span>
+      <time id="folio-fecha" class="block font-semibold text-papel" datetime="2026-09-09">
+        2026-09-09
+      </time>
+    </p>
+  </div>
+  <div class="scroll-ink" aria-hidden="true"><span id="scroll-ink-bar"></span></div>
+</header>

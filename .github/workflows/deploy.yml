@@ -1,0 +1,40 @@
+# Publicar el portafolio en GitHub Pages.
+#
+# EXPLICACIÓN:
+# Este archivo NO publica la rama `astro`. Solo corre cuando hay un push
+# a `main` (o cuando lo lanzas a mano en la pestaña Actions).
+#
+# Cuando mezclemos esta rama a main, hay que cambiar en GitHub:
+# Settings → Pages → Source = GitHub Actions
+# (dejar de servir la raíz de main como HTML suelto).
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Install, build, and upload
+        uses: withastro/action@v6
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

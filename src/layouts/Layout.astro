@@ -1,0 +1,90 @@
+---
+/**
+ * Molde de todas las páginas (home y 404).
+ *
+ * EXPLICACIÓN:
+ * En PHP esto sería un header.php + footer.php con un `include`.
+ * `<slot />` es el hueco donde cada página pone su contenido.
+ *
+ * `simple` = página 404: sin menú, sin lightbox, sin script de galería.
+ */
+import "../styles/global.css";
+import { sitio } from "../data/sitio";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  simple?: boolean;
+}
+
+const {
+  title,
+  description = sitio.descripcion,
+  simple = false,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--
+      Estos meta tags le dicen a Google y a WhatsApp qué mostrar
+      cuando alguien comparte el enlace del portafolio.
+    -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content={sitio.themeColor} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={sitio.ogDescripcion} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={sitio.url} />
+    <meta property="og:image" content={sitio.ogImagen} />
+    <link rel="canonical" href={sitio.url} />
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,ital,wght@8..60,0,400;8..60,0,600;8..60,1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+
+    {
+      !simple && (
+        <>
+          <a class="skip-link" href="#contenido">
+            Saltar al contenido
+          </a>
+          <Header />
+        </>
+      )
+    }
+
+    <slot />
+
+    {!simple && <Footer />}
+
+    {
+      !simple && (
+        <dialog class="lightbox" id="lightbox" aria-label="Captura ampliada">
+          <img id="lightbox-img" alt="" />
+          <p id="lightbox-cap" class="lightbox-cap"></p>
+          <form method="dialog">
+            <button class="btn btn-ink" type="submit">
+              Cerrar
+            </button>
+          </form>
+        </dialog>
+      )
+    }
+
+    {/* Astro empaqueta este .ts y lo manda al navegador. */}
+    <script src="../scripts/portfolio.ts"></script>
+  </body>
+</html>

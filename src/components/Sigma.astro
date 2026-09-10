@@ -1,0 +1,116 @@
+---
+import { sitio } from "../data/sitio";
+import Ticket from "./Ticket.astro";
+import Stamp from "./Stamp.astro";
+import Gallery from "./Gallery.astro";
+
+const caso = [
+  {
+    titulo: "El problema",
+    texto:
+      "Un centro de servicio técnico no cabe en una hoja de cálculo: órdenes, refacciones, calidad, evidencia fotográfica y el cliente preguntando “¿ya va mi equipo?”. El proceso vivía repartido entre gente, papel y archivos.",
+  },
+  {
+    titulo: "Qué construí",
+    texto:
+      "Un sistema web y PWA donde el flujo cabe en un solo lugar: de la recepción a la entrega, cotizador ligado al almacén, incidencias de calidad, evidencias y un portal para que el cliente siga su orden.",
+  },
+  {
+    titulo: "Cómo corre hoy",
+    texto:
+      "Django 5.2, Python 3.12, PostgreSQL, TypeScript, Celery, Redis. Varios países (México, Argentina, Chile, Colombia). Servidor Ubuntu y Cloudflare. El código está en GitHub.",
+  },
+];
+
+const chips = ["Django 5.2", "Python 3.12", "TypeScript", "PostgreSQL", "Celery + Redis", "PWA"];
+
+const modulos = [
+  {
+    id: "01",
+    titulo: "Órdenes de servicio",
+    texto: "Del ingreso del equipo a la entrega, con estados y evidencia en el camino.",
+  },
+  {
+    id: "02",
+    titulo: "Almacén y cotizador",
+    texto: "Las piezas y el precio van ligados a la misma orden, no en otro archivo.",
+  },
+  {
+    id: "03",
+    titulo: "Calidad",
+    texto: "Incidencias, reincidencias y reportes para ver dónde se rompe el proceso.",
+  },
+  {
+    id: "04",
+    titulo: "Portal del cliente",
+    texto: "El cliente consulta el avance, ve fotos y recibe avisos (PWA).",
+  },
+];
+---
+
+<section id="sigma" class="block-dim py-14">
+  <div class="wrap">
+    <p class="m-0 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-ambar">
+      Proyecto insignia
+    </p>
+    <h2
+      class="mt-[0.35rem] mb-[0.6rem] font-display text-[clamp(2rem,5vw,3.2rem)] font-extrabold tracking-[-0.03em] text-papel"
+    >
+      SIGMA
+    </h2>
+    <p class="mb-8 max-w-[38rem] text-crema">
+      Sistema Integrado de Gestión Técnica y Control de Calidad. Lo diseñé, lo
+      programé y lo mantengo en producción.
+    </p>
+
+    <Ticket class="reveal">
+      <header class="mb-3.5 flex items-center justify-between gap-4">
+        <p class="kicker">inventario-calidad-django</p>
+        <Stamp tono="teal" texto="En producción" />
+      </header>
+
+      <div class="case-grid mt-3.5 grid grid-cols-1 gap-5 desk:grid-cols-3">
+        {
+          caso.map((bloque) => (
+            <div>
+              <h3>{bloque.titulo}</h3>
+              <p>{bloque.texto}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <ul class="chip-list">
+        {chips.map((chip) => (
+          <li>{chip}</li>
+        ))}
+      </ul>
+      <div class="mt-[1.4rem] flex flex-wrap gap-[0.7rem]">
+        <a class="btn btn-ink" href={sitio.sigmaRepo} rel="noopener noreferrer">Ver código</a>
+        <a
+          class="btn btn-ghost"
+          href={`${sitio.sigmaRepo}#readme`}
+          rel="noopener noreferrer"
+        >
+          README
+        </a>
+      </div>
+    </Ticket>
+
+    <Gallery />
+
+    <ul class="module-list mt-[1.4rem] grid list-none grid-cols-1 gap-4 p-0 desk:grid-cols-2">
+      {
+        modulos.map((mod) => (
+          <li class="reveal">
+            <span class="mod-id">{mod.id}</span>
+            <div>
+              <h3>{mod.titulo}</h3>
+              <p>{mod.texto}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

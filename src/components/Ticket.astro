@@ -1,0 +1,17 @@
+---
+/**
+ * Ficha de papel con perforación.
+ * `<slot />` es el interior: cada página mete títulos, párrafos, botones...
+ * `class` extra sirve para ticket-hero, ticket-end o reveal.
+ */
+interface Props {
+  class?: string;
+}
+
+const { class: extra = "" } = Astro.props;
+---
+
+<article class:list={["ticket", extra]}>
+  <div class="ticket-perforation" aria-hidden="true"></div>
+  <slot />
+</article>

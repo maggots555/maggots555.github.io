@@ -1,36 +1,64 @@
 /*
-  Portafolio de Jorge Luis Magos Alvarez
-  --------------------------------------
-  Conservamos la estética de ficha (papel crema + tinta) porque se siente
-  propia del oficio del taller. El contenido, en cambio, presenta a la
-  persona primero y a SIGMA como prueba de trabajo.
+  Portafolio — estilos globales
+  -----------------------------
+  Tailwind v4 entra con `@import "tailwindcss"`.
+  `@theme` enseña a Tailwind NUESTRA paleta (no la genérica del tutorial).
+  El CSS de oficio (ticket, sello, grano, galería) se queda aquí porque
+  no cabe en una clase suelta de Tailwind.
 */
 
-:root {
-  --bg: #14110e;
-  --bg-raised: #1c1814;
-  --steel: #2a2520;
-  --ticket: #efe6d4;
-  --ticket-edge: #d9cdb4;
-  --ink: #1a1612;
-  --ink-soft: #4a433a;
-  --amber: #e59b2d;
-  --teal: #2eb8a8;
-  --stamp: #c4452e;
-  --led: #8bc34a;
-  --cream-dim: #c4b9a2;
-  --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
-  --radius: 4px;
+@import "tailwindcss";
+
+/*
+  Tokens del taller.
+  En el HTML puedes usar: bg-fondo, text-papel, font-display, desk:grid-cols-2
+  compact = 520px, desk = 860px (los mismos cortes que el CSS viejo).
+*/
+@theme {
+  --color-fondo: #14110e;
+  --color-fondo-alto: #1c1814;
+  --color-acero: #2a2520;
+  --color-papel: #efe6d4;
+  --color-papel-borde: #d9cdb4;
+  --color-tinta: #1a1612;
+  --color-tinta-suave: #4a433a;
+  --color-ambar: #e59b2d;
+  --color-patina: #2eb8a8;
+  --color-sello: #c4452e;
+  --color-led: #8bc34a;
+  --color-crema: #c4b9a2;
+
   --font-display: "Bricolage Grotesque", "Arial Black", sans-serif;
   --font-body: "Source Serif 4", Georgia, serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
-  --wrap: 1120px;
+
+  --shadow-ficha: 0 18px 50px rgba(0, 0, 0, 0.35);
+  --radius-ficha: 4px;
+
+  --breakpoint-compact: 32.5rem;
+  --breakpoint-desk: 53.75rem;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+/*
+  Alias cortos para el CSS de oficio.
+  Así el resto del archivo se lee como antes: var(--ticket), var(--amber).
+*/
+:root {
+  --bg: var(--color-fondo);
+  --bg-raised: var(--color-fondo-alto);
+  --steel: var(--color-acero);
+  --ticket: var(--color-papel);
+  --ticket-edge: var(--color-papel-borde);
+  --ink: var(--color-tinta);
+  --ink-soft: var(--color-tinta-suave);
+  --amber: var(--color-ambar);
+  --teal: var(--color-patina);
+  --stamp: var(--color-sello);
+  --led: var(--color-led);
+  --cream-dim: var(--color-crema);
+  --shadow: var(--shadow-ficha);
+  --radius: var(--radius-ficha);
+  --wrap: 1120px;
 }
 
 html {
@@ -90,6 +118,7 @@ a {
   top: 1rem;
 }
 
+/* Ancho máximo del contenido (1120px, con margen a los lados) */
 .wrap {
   width: min(100% - 2rem, var(--wrap));
   margin-inline: auto;
@@ -125,21 +154,6 @@ a {
   transform-origin: left center;
 }
 
-.mast-inner {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 1.25rem;
-  align-items: center;
-  padding-block: 0.85rem;
-}
-
-.brand {
-  display: flex;
-  gap: 0.75rem;
-  align-items: center;
-  text-decoration: none;
-}
-
 .brand-mark {
   display: grid;
   place-items: center;
@@ -151,12 +165,6 @@ a {
   font-weight: 800;
   font-size: 0.85rem;
   letter-spacing: 0.04em;
-}
-
-.brand-copy {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.15;
 }
 
 .brand-copy strong {
@@ -172,17 +180,7 @@ a {
   text-transform: uppercase;
 }
 
-.nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.35rem 1.1rem;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
+/* Subrayado ámbar del menú (el ::after no se puede hacer limpio en Tailwind) */
 .nav a {
   position: relative;
   text-decoration: none;
@@ -213,22 +211,6 @@ a {
   transform: scaleX(1);
 }
 
-.folio {
-  margin: 0;
-  text-align: right;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--cream-dim);
-}
-
-.folio time {
-  display: block;
-  color: var(--ticket);
-  font-weight: 600;
-}
-
 /* ---------- Tickets (papel) ---------- */
 .ticket {
   position: relative;
@@ -248,7 +230,6 @@ a {
   transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
-/* Al pasar el mouse, el papel se levanta un milímetro (solo transform) */
 .ticket:hover {
   transform: translateY(-3px);
 }
@@ -257,7 +238,6 @@ a {
   transform: none;
 }
 
-/* Orificios de taladro en el borde, como ficha de archivo */
 .ticket-perforation {
   position: absolute;
   left: 0;
@@ -269,26 +249,13 @@ a {
   background-position: 8px 0;
 }
 
-.ticket-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 0.85rem;
-}
-
-.kicker,
-.section-kicker {
+.kicker {
   margin: 0;
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-soft);
-}
-
-.section-kicker {
-  color: var(--amber);
 }
 
 .stamp {
@@ -319,7 +286,6 @@ h1 {
   font-size: clamp(2rem, 5.2vw, 3.4rem);
 }
 
-/* El rol va dentro del h1, pero más chico: es subtítulo, no un segundo titular. */
 h1 em {
   display: block;
   margin-top: 0.55rem;
@@ -336,20 +302,12 @@ h1 em {
   color: var(--ink-soft);
 }
 
-/* Párrafos dentro de un ticket (Sobre mí, caso SIGMA, contacto) */
 .ticket p {
   color: var(--ink-soft);
 }
 
 .ticket p + p {
   margin-top: 0.85rem;
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.7rem;
-  margin-top: 1.4rem;
 }
 
 .btn {
@@ -395,15 +353,6 @@ h1 em {
   color: var(--ticket);
 }
 
-.meta-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.8rem;
-  margin: 1.8rem 0 0;
-  padding-top: 1.2rem;
-  border-top: 1px dashed var(--ticket-edge);
-}
-
 .meta-row dt {
   font-family: var(--font-mono);
   font-size: 0.65rem;
@@ -433,18 +382,6 @@ h1 em {
   50% { opacity: 0.45; }
 }
 
-/* ---------- Hero layout ---------- */
-.hero {
-  padding-block: 2.8rem 1rem;
-}
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.4fr 0.9fr;
-  gap: 1.4rem;
-  align-items: stretch;
-}
-
 .hero .ticket-hero {
   animation: ticketDrop 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -457,7 +394,6 @@ h1 em {
   animation: stampHit 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.32s both;
 }
 
-/* La ficha cae al banco, como una orden que acaban de dejar */
 @keyframes ticketDrop {
   from {
     opacity: 0;
@@ -480,7 +416,6 @@ h1 em {
   }
 }
 
-/* El sello pega y se asienta en -3deg (el ángulo de reposo) */
 @keyframes stampHit {
   0% {
     opacity: 0;
@@ -547,33 +482,8 @@ h1 em {
   color: var(--cream-dim);
 }
 
-/* ---------- Secciones ---------- */
-.block {
-  padding-block: 3.5rem;
-}
-
 .block-dim {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.18), transparent);
-}
-
-.section-title {
-  margin: 0.35rem 0 0.6rem;
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  color: var(--ticket);
-}
-
-.section-sub {
-  max-width: 38rem;
-  margin: 0 0 2rem;
-  color: var(--cream-dim);
-}
-
-/* Caso de estudio SIGMA: tres columnas (problema / qué hice / cómo corre) */
-.case-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.2rem;
-  margin-top: 0.85rem;
 }
 
 .case-grid h3 {
@@ -605,28 +515,6 @@ h1 em {
   text-transform: uppercase;
 }
 
-/* ---------- Galería de capturas SIGMA ---------- */
-.gallery-title {
-  margin: 2.2rem 0 0.3rem;
-  font-size: 1.35rem;
-  color: var(--ticket);
-}
-
-.gallery-hint {
-  margin: 0 0 1rem;
-  color: var(--cream-dim);
-  font-size: 0.95rem;
-}
-
-.shot-gallery {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin: 0 0 1.4rem;
-  padding: 0;
-  list-style: none;
-}
-
 .shot {
   margin: 0;
   overflow: hidden;
@@ -653,7 +541,6 @@ h1 em {
   transform: none;
 }
 
-/* La primera captura (gráfico) ocupa el ancho completo y se ve más grande */
 .shot-gallery li:first-child {
   grid-column: 1 / -1;
 }
@@ -671,7 +558,6 @@ h1 em {
   color: var(--cream-dim);
 }
 
-/* Recuadro cuando todavía no está el archivo de la captura */
 .shot.is-empty {
   cursor: default;
 }
@@ -697,7 +583,6 @@ h1 em {
     );
 }
 
-/* Ventana para ver la captura a tamaño grande */
 .lightbox {
   width: min(96vw, 1100px);
   max-height: 92vh;
@@ -750,15 +635,6 @@ h1 em {
   color: var(--ink-soft);
 }
 
-.module-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin: 1.4rem 0 0;
-  padding: 0;
-  list-style: none;
-}
-
 .module-list li {
   display: flex;
   gap: 1rem;
@@ -784,22 +660,9 @@ h1 em {
   font-size: 0.95rem;
 }
 
-.order-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.2rem;
-}
-
 .order-grid h3 {
   margin: 0.2rem 0 0.7rem;
   font-size: 1.55rem;
-}
-
-/* Tablero de ganchos */
-.pegboard {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
 }
 
 .peg-col {
@@ -855,32 +718,10 @@ h1 em {
   justify-content: center;
 }
 
-.foot {
-  padding: 1.4rem 0 2.2rem;
-  border-top: 1px solid rgba(239, 230, 212, 0.1);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--cream-dim);
-}
-
-.foot-inner {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0.6rem;
-}
-
 .foot p {
   margin: 0;
 }
 
-/*
-  Movimiento:
-  - Hero: una sola escena al cargar (ficha + sello + monitor).
-  - El resto aparece al entrar en pantalla (Intersection Observer).
-  - Hover responde a la persona, no se mueve solo.
-  Solo se animan transform y opacity (GPU).
-*/
 .reveal {
   opacity: 0;
   transform: translateY(14px);
@@ -894,7 +735,6 @@ h1 em {
   transform: none;
 }
 
-/* Lista 01–04 sí es una secuencia: un pelín de retraso entre ítems */
 .module-list .reveal:nth-child(2) { transition-delay: 0.07s; }
 .module-list .reveal:nth-child(3) { transition-delay: 0.14s; }
 .module-list .reveal:nth-child(4) { transition-delay: 0.21s; }
@@ -929,44 +769,5 @@ h1 em {
 
   .nav a::after {
     transition: none;
-  }
-}
-
-@media (max-width: 860px) {
-  .mast-inner {
-    grid-template-columns: 1fr auto;
-  }
-
-  /* El menú baja de renglón; en móvil se recorre, no se esconde */
-  .nav {
-    grid-column: 1 / -1;
-    justify-content: flex-start;
-  }
-
-  .hero-grid,
-  .case-grid,
-  .module-list,
-  .order-grid,
-  .pegboard,
-  .meta-row {
-    grid-template-columns: 1fr;
-  }
-
-  .meta-row {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 520px) {
-  .folio {
-    display: none;
-  }
-
-  .mast-inner {
-    grid-template-columns: 1fr;
-  }
-
-  .shot-gallery {
-    grid-template-columns: 1fr;
   }
 }

@@ -1,0 +1,26 @@
+---
+/**
+ * Galería de capturas de SIGMA.
+ * Un clic las abre en grande (el script portfolio.ts). Si falta un archivo, JS pone un recuadro.
+ */
+import { capturas } from "../data/capturas";
+---
+
+<h3 class="mt-[2.2rem] mb-[0.3rem] font-display text-[1.35rem] font-extrabold text-papel">
+  Capturas
+</h3>
+<p class="mb-4 text-[0.95rem] text-crema">
+  Pantallas del sistema en producción. Clic para ampliar.
+</p>
+<ul class="shot-gallery mb-[1.4rem] grid list-none grid-cols-1 gap-4 p-0 compact:grid-cols-2">
+  {
+    capturas.map((foto) => (
+      <li>
+        <figure class="shot" data-caption={foto.caption}>
+          <img src={foto.src} alt={foto.alt} width="1600" height="720" />
+          <figcaption>{foto.pie}</figcaption>
+        </figure>
+      </li>
+    ))
+  }
+</ul>
