@@ -5,15 +5,15 @@ import { herramientas } from "../data/herramientas";
 <section id="herramientas" class="block-dim py-16 desk:py-24">
   <div class="wrap">
     <header class="section-head">
-      <h2>Herramientas</h2>
-      <p>Lo que uso en el día a día, agrupado por capa.</p>
+      <h2 class="reveal">Herramientas</h2>
+      <p class="reveal">Lo que uso en el día a día, agrupado por capa.</p>
     </header>
 
     {/* Tres columnas tipo créditos finales, no un tablero de clavijas. */}
     <div class="pegboard grid grid-cols-1 gap-8 desk:grid-cols-3">
       {
         herramientas.map((capa) => (
-          <div class="credit-col">
+          <div class="credit-col reveal">
             <h3>{capa.titulo}</h3>
             <ul>
               {capa.items.map((item) => (

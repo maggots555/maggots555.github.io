@@ -6,7 +6,8 @@
  * No habla con Django ni con una base de datos.
  *  1) Fecha de hoy y año del pie.
  *  2) Galería + lightbox.
- *  3) Barra de luz según cuánto has bajado.
+ *  3) Barra de luz + paralelaje suave de la figura.
+ *  4) Revelar títulos al entrar en pantalla (Intersection Observer).
  *
  * TypeScript nos obliga a preguntar “¿existe este elemento?” antes de usarlo.
  * Por eso ves `if (fechaNodo)` y `instanceof HTMLDialogElement`.
@@ -103,15 +104,21 @@ function mostrarPlaceholder(figura: HTMLElement, img: HTMLImageElement): void {
 }
 
 /**
- * La barra de luz usa scaleX (GPU). 0 = arriba, 1 = final de la página.
+ * Barra de luz (scaleX) + la figura baja un poco más lento que el scroll.
+ * Las dos viven en el mismo listener para no disparar trabajo dos veces.
  */
-function iniciarTinta(sinMovimiento: boolean): void {
+function iniciarScroll(sinMovimiento: boolean): void {
   const barra = document.getElementById("scroll-ink-bar");
-  if (!barra || sinMovimiento) {
+  const figura = document.querySelector<HTMLElement>(".hero-atmosphere");
+
+  if (sinMovimiento) {
     return;
   }
 
+  let pendiente = false;
+
   function pintar(): void {
+    pendiente = false;
     const max = document.documentElement.scrollHeight - window.innerHeight;
     let p = max > 0 ? window.scrollY / max : 0;
     if (p < 0) {
@@ -120,15 +127,63 @@ function iniciarTinta(sinMovimiento: boolean): void {
     if (p > 1) {
       p = 1;
     }
-    barra.style.transform = "scaleX(" + p + ")";
+    if (barra) {
+      barra.style.transform = "scaleX(" + p + ")";
+    }
+    if (figura) {
+      const y = Math.min(window.scrollY * 0.2, 110);
+      figura.style.transform = "translate3d(0, " + y + "px, 0)";
+    }
+  }
+
+  function enScroll(): void {
+    if (!pendiente) {
+      pendiente = true;
+      requestAnimationFrame(pintar);
+    }
   }
 
   pintar();
-  window.addEventListener("scroll", pintar, { passive: true });
+  window.addEventListener("scroll", enScroll, { passive: true });
+}
+
+/**
+ * Cuando un bloque .reveal entra en pantalla, le ponemos .is-in.
+ * El CSS hace el fade. Solo una vez (unobserve).
+ */
+function iniciarRevelado(sinMovimiento: boolean): void {
+  const nodos = document.querySelectorAll(".reveal");
+  if (sinMovimiento || !("IntersectionObserver" in window)) {
+    nodos.forEach((nodo) => {
+      nodo.classList.add("is-in");
+    });
+    return;
+  }
+
+  const observador = new IntersectionObserver(
+    (entradas) => {
+      entradas.forEach((entrada) => {
+        if (entrada.isIntersecting) {
+          entrada.target.classList.add("is-in");
+          observador.unobserve(entrada.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+  );
+
+  nodos.forEach((nodo) => {
+    observador.observe(nodo);
+  });
 }
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+if (!reduceMotion) {
+  document.documentElement.classList.add("js-motion");
+}
+
 iniciarFecha();
 iniciarGalería();
-iniciarTinta(reduceMotion);
+iniciarScroll(reduceMotion);
+iniciarRevelado(reduceMotion);

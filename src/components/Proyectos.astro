@@ -18,8 +18,8 @@ const tonoPorSello: Record<Sello, "amber" | "teal" | "red"> = {
 <section id="proyectos" class="py-16 desk:py-24">
   <div class="wrap">
     <header class="section-head">
-      <h2>Otros proyectos</h2>
-      <p>
+      <h2 class="reveal">Otros proyectos</h2>
+      <p class="reveal">
         El PHP fue el primer sistema. El MCP es una herramienta de escritorio, aparte del taller.
       </p>
     </header>
@@ -27,7 +27,7 @@ const tonoPorSello: Record<Sello, "amber" | "teal" | "red"> = {
     <div class="order-grid grid grid-cols-1 gap-10 desk:grid-cols-2">
       {
         proyectos.map((proyecto) => (
-          <Ticket>
+          <Ticket class="reveal">
             <header class="mb-3 flex items-baseline justify-between gap-4">
               <p class="m-0 italic text-crema">{proyecto.slug}</p>
               <Stamp tono={tonoPorSello[proyecto.sello]} texto={proyecto.selloTexto} />

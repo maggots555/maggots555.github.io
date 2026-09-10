@@ -333,12 +333,21 @@ h1 em {
   font-size: 0.95rem;
   text-decoration: none;
   letter-spacing: 0.01em;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background 0.22s ease,
+    color 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.15s ease;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  box-shadow: 0 0 28px rgba(201, 180, 154, 0.18);
 }
 
 .btn:active {
-  transform: none;
-  opacity: 0.85;
+  transform: scale(0.98);
 }
 
 .btn-ink {
@@ -394,6 +403,22 @@ h1 em {
   align-items: center;
 }
 
+/* Haz de luz: late, como el rayo del cuadro. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    118deg,
+    transparent 34%,
+    rgba(201, 180, 154, 0.1) 48%,
+    transparent 64%
+  );
+  animation: hazPulse 8s ease-in-out infinite;
+}
+
 .hero-atmosphere {
   position: absolute;
   inset: 0 0 auto auto;
@@ -402,6 +427,7 @@ h1 em {
   overflow: hidden;
   pointer-events: none;
   z-index: 0;
+  animation: figureIn 1.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .hero-atmosphere img {
@@ -411,6 +437,7 @@ h1 em {
   object-fit: cover;
   object-position: 82% 28%;
   opacity: 0.92;
+  animation: figureBreath 36s 1.8s ease-in-out infinite alternate;
 }
 
 /*
@@ -487,36 +514,83 @@ h1 em {
 }
 
 /*
-  Una sola orquestación: el título aparece como si lo iluminaran.
-  No hay fade en cada sección (eso se siente de plantilla).
+  Orquestación del hero (luz que revela, no un fade de plantilla):
+  1) nace la figura
+  2) aparece el nombre, línea a línea
+  3) el resto de créditos
 */
 .hero-soy,
 .hero-name,
-h1 em,
+.hero h1 em,
 .hero .lede,
 .hero .hero-actions,
-.hero-credits {
-  animation: titleReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+.hero .meta-row,
+.hero-credits,
+.hero-foot {
+  animation: titleReveal 1.15s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.hero-name:nth-child(2) { animation-delay: 0.08s; }
-.hero-name:nth-child(3) { animation-delay: 0.14s; }
-.hero-name:nth-child(4) { animation-delay: 0.2s; }
-h1 em { animation-delay: 0.28s; }
-.hero .lede { animation-delay: 0.32s; }
-.hero .hero-actions { animation-delay: 0.4s; }
-.hero-credits { animation-delay: 0.48s; }
+.hero-soy { animation-delay: 0.45s; }
+.hero-name:nth-child(2) { animation-delay: 0.58s; }
+.hero-name:nth-child(3) { animation-delay: 0.7s; }
+.hero-name:nth-child(4) { animation-delay: 0.82s; }
+.hero h1 em { animation-delay: 0.94s; }
+.hero .lede { animation-delay: 1.05s; }
+.hero .hero-actions { animation-delay: 1.16s; }
+.hero .meta-row { animation-delay: 1.26s; }
+.hero-credits { animation-delay: 1.36s; }
+.hero-foot { animation-delay: 1.46s; }
 
 @keyframes titleReveal {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
     transform: none;
   }
 }
+
+@keyframes figureIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes figureBreath {
+  from { transform: scale(1) translate3d(0, 0, 0); }
+  to { transform: scale(1.045) translate3d(0, -12px, 0); }
+}
+
+@keyframes hazPulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+
+/*
+  Títulos de sección al entrar en pantalla.
+  `.js-motion` lo pone el script: si JavaScript no corre, el texto se ve igual.
+*/
+.js-motion .reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.js-motion .reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+.section-head .reveal:nth-child(2) { transition-delay: 0.1s; }
+.module-list .reveal:nth-child(2) { transition-delay: 0.08s; }
+.module-list .reveal:nth-child(3) { transition-delay: 0.16s; }
+.module-list .reveal:nth-child(4) { transition-delay: 0.24s; }
+.pegboard .reveal:nth-child(2) { transition-delay: 0.1s; }
+.pegboard .reveal:nth-child(3) { transition-delay: 0.2s; }
+.order-grid .reveal:nth-child(2) { transition-delay: 0.1s; }
 
 /* Encabezado de sección: el h2 es el gráfico, sin ceja en versales. */
 .section-head h2 {
@@ -582,23 +656,15 @@ h1 em { animation-delay: 0.28s; }
   object-fit: cover;
   object-position: top center;
   background: #0c0b0a;
-  transition: opacity 0.25s ease;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .shot:hover img {
-  opacity: 0.88;
+  transform: scale(1.04);
 }
 
 .shot.is-empty:hover img {
-  opacity: 1;
-}
-
-.shot-gallery li:first-child {
-  grid-column: 1 / -1;
-}
-
-.shot-gallery li:first-child img {
-  height: 340px;
+  transform: none;
 }
 
 .shot figcaption {
@@ -609,6 +675,19 @@ h1 em { animation-delay: 0.28s; }
   letter-spacing: 0;
   text-transform: none;
   color: var(--cream-dim);
+  transition: color 0.22s ease;
+}
+
+.shot:hover figcaption {
+  color: var(--papel);
+}
+
+.shot-gallery li:first-child {
+  grid-column: 1 / -1;
+}
+
+.shot-gallery li:first-child img {
+  height: 340px;
 }
 
 .shot.is-empty {
@@ -824,12 +903,17 @@ h1 em { animation-delay: 0.28s; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 
+  .hero::before,
+  .hero-atmosphere,
+  .hero-atmosphere img,
   .hero-soy,
   .hero-name,
-  h1 em,
+  .hero h1 em,
   .hero .lede,
   .hero .hero-actions,
+  .hero .meta-row,
   .hero-credits,
+  .hero-foot,
   .lightbox[open],
   .lightbox[open]::backdrop {
     animation: none;
@@ -837,12 +921,22 @@ h1 em { animation-delay: 0.28s; }
     transform: none;
   }
 
+  .js-motion .reveal,
+  .js-motion .reveal.is-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .btn,
+  .shot img,
+  .shot figcaption,
+  .nav a::after {
+    transition: none;
+  }
+
   .scroll-ink span {
     transform: none;
     width: 0;
-  }
-
-  .nav a::after {
-    transition: none;
   }
 }
